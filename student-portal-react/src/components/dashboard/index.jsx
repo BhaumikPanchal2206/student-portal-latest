@@ -1,12 +1,12 @@
-"use client"
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const dashboard_greet = {
     "first": [
         { title: "Class", description: <>12 <sup> th</sup></> },
         { title: "Division", description: "B" },
     ],
-    second: [
+    "second": [
         { title: "Enrollment Number", description: "2204030102106" },
         { title: <>Attendance<div>(last month)</div></>, description: "80%" },
     ]
@@ -45,9 +45,68 @@ const Dashboard = () => {
                 </div>
             </section>
 
+            <div className='px-4 grid grid-cols-2 gap-4'>
+                <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
+                    <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
+                        Exam Result
+                    </div>
+                    <div className="py-4">
+                        <h5 className="text-lg px-4 font-bold mb-2 text-black dark:text-white">Last Exam Result</h5>
+                        {/* <p className="text-gray-700 dark:text-gray-100 mb-4">With supporting text below as a natural lead-in to additional content.</p> */}
+                        <div className="text-gray-700 px-4 dark:text-gray-100 mb-4 flex justify-between">
+                            <div>
+                                <p className='font-semibold'>Marks</p>
+                                <p className='text-gray-600 dark:text-gray-100'>72</p>
+                            </div>
+                            <div>
+                                <p className='font-semibold'>Passing Marks</p>
+                                <p className='text-gray-600 dark:text-gray-100'>33</p>
+                            </div>
+                            <div>
+                                <p className='font-semibold'>Total Marks</p>
+                                <p className='text-gray-600 dark:text-gray-100'>100</p>
+                            </div>
+                        </div>
+                        <div className='py-2 px-4 bg-green-100 text-black dark:text-black'>
+                            <i className="fa-solid fa-check mr-2"></i>
+                            Pass
+                        </div>
+                        {/* <div className='py-2 px-4 bg-red-100 text-black dark:text-black'>
+                            <i className="fa-solid fa-xmark mr-2"></i>
+                            Fail
+                        </div> */}
+                        <div className='mt-3'>
+                            <Link to="/exam/result" className="bg-blue-500 mx-4 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">Show Results</Link>
+                        </div>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+                <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
+                    <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
+                        Featured
+                    </div>
+                    <div className="p-4">
+                        <h5 className="text-lg font-bold mb-2 text-black dark:text-white">Last Exam Result</h5>
+                        <p className="text-gray-700 dark:text-gray-100 mb-4">With supporting text below as a natural lead-in to additional content.</p>
+                        <Link to="/exam/result" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">Show Results</Link>
+                    </div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
+                    <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
+                        <i className="fa-solid fa-bullhorn me-4"></i>Announcements
+                    </div>
+                    <div className="p-4">
+                        <h5 className="text-lg font-bold mb-2 text-black dark:text-white">26 January</h5>
+                        <p className="text-gray-700 dark:text-gray-100 mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem, veritatis.</p>
+                        <Link to="/announcements" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">Show Results</Link>
+                    </div>
+                </div>
+            </div>
 
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
+            {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
                 <div className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
                     <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
@@ -264,7 +323,7 @@ const Dashboard = () => {
                                             <div className="self-center">
                                                 <a
                                                     className="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-100"
-                                                    href="#0"
+                                                    to="#0"
                                                     style={{ outline: "none" }}
                                                 >
                                                     Nick Mark
@@ -272,7 +331,7 @@ const Dashboard = () => {
                                                 mentioned{" "}
                                                 <a
                                                     className="font-medium text-gray-800 dark:text-gray-50 dark:hover:text-gray-100"
-                                                    href="#0"
+                                                    to="#0"
                                                     style={{ outline: "none" }}
                                                 >
                                                     Sara Smith
@@ -282,7 +341,7 @@ const Dashboard = () => {
                                             <div className="flex-shrink-0 ml-2">
                                                 <a
                                                     className="flex items-center font-medium text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500"
-                                                    href="#0"
+                                                    to="#0"
                                                     style={{ outline: "none" }}
                                                 >
                                                     View
@@ -321,7 +380,7 @@ const Dashboard = () => {
                                                 The post{" "}
                                                 <a
                                                     className="font-medium text-gray-800 dark:text-gray-50 dark:hover:text-gray-100"
-                                                    href="#0"
+                                                    to="#0"
                                                     style={{ outline: "none" }}
                                                 >
                                                     Post Name
@@ -329,7 +388,7 @@ const Dashboard = () => {
                                                 was removed by{" "}
                                                 <a
                                                     className="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-100"
-                                                    href="#0"
+                                                    to="#0"
                                                     style={{ outline: "none" }}
                                                 >
                                                     Nick Mark
@@ -338,7 +397,7 @@ const Dashboard = () => {
                                             <div className="flex-shrink-0 ml-2">
                                                 <a
                                                     className="flex items-center font-medium text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500"
-                                                    href="#0"
+                                                    to="#0"
                                                     style={{ outline: "none" }}
                                                 >
                                                     View
@@ -381,7 +440,7 @@ const Dashboard = () => {
                                             <div className="self-center">
                                                 <a
                                                     className="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-100"
-                                                    href="#0"
+                                                    to="#0"
                                                     style={{ outline: "none" }}
                                                 >
                                                     240+
@@ -389,7 +448,7 @@ const Dashboard = () => {
                                                 users have subscribed to{" "}
                                                 <a
                                                     className="font-medium text-gray-800 dark:text-gray-50 dark:hover:text-gray-100"
-                                                    href="#0"
+                                                    to="#0"
                                                     style={{ outline: "none" }}
                                                 >
                                                     Newsletter #1
@@ -398,7 +457,7 @@ const Dashboard = () => {
                                             <div className="flex-shrink-0 ml-2">
                                                 <a
                                                     className="flex items-center font-medium text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500"
-                                                    href="#0"
+                                                    to="#0"
                                                     style={{ outline: "none" }}
                                                 >
                                                     View
@@ -428,7 +487,6 @@ const Dashboard = () => {
                 </div>
             </div>
 
-
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-4 gap-4 text-black dark:text-white">
                 <div className="md:col-span-2 xl:col-span-3">
                     <h3 className="text-lg font-semibold">Task summaries of recent sprints</h3>
@@ -449,7 +507,6 @@ const Dashboard = () => {
                                         <svg className="h-4 fill-current mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M11 4c-3.855 0-7 3.145-7 7v28c0 3.855 3.145 7 7 7h28c3.855 0 7-3.145 7-7V11c0-3.855-3.145-7-7-7zm0 2h28c2.773 0 5 2.227 5 5v28c0 2.773-2.227 5-5 5H11c-2.773 0-5-2.227-5-5V11c0-2.773 2.227-5 5-5zm25.234 9.832l-13.32 15.723-8.133-7.586-1.363 1.465 9.664 9.015 14.684-17.324z" /></svg>
                                         3/5
                                     </span>
-                                    {/* <img alt='' src="https://i.imgur.com/OZaT7jl.png" className="rounded-full" /> */}
                                 </div>
                             </div>
                             <div className="bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer">Check the meta tags</div>
@@ -522,7 +579,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* <div className="mt-4 mx-4">
                 <div className="w-full overflow-hidden rounded-lg shadow-xs">
@@ -683,7 +740,7 @@ const Dashboard = () => {
                 </div>
             </div> */}
 
-            <div className="mt-8 mx-4">
+            {/* <div className="mt-8 mx-4">
                 <div className="grid grid-cols-1 md:grid-cols-2">
                     <div className="p-6 mr-2 bg-gray-100 dark:bg-gray-800 sm:rounded-lg">
                         <h1 className="text-4xl sm:text-5xl text-gray-800 dark:text-white font-extrabold tracking-tight">Get in touch</h1>
@@ -737,45 +794,45 @@ const Dashboard = () => {
                     <h4 className="text-lg font-semibold">Have taken ideas & reused components from the following resources:</h4>
                     <ul>
                         <li className="mt-3">
-                            <a className="flex items-center text-blue-700 dark:text-gray-100" href="https://tailwindcomponents.com/component/Header-navigation-1" target="_blank">
+                            <a className="flex items-center text-blue-700 dark:text-gray-100" to="https://tailwindcomponents.com/component/Header-navigation-1" target="_blank">
                                 <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 <span className="inline-flex pl-2">Header Navigation</span>
                             </a>
                         </li>
                         <li className="mt-2">
-                            <a className="flex items-center text-blue-700 dark:text-gray-100" href="https://tailwindcomponents.com/component/contact-form-1" target="_blank">
+                            <a className="flex items-center text-blue-700 dark:text-gray-100" to="https://tailwindcomponents.com/component/contact-form-1" target="_blank">
                                 <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 <span className="inline-flex pl-2">Contact Form</span>
                             </a>
                         </li>
                         <li className="mt-2">
-                            <a className="flex items-center text-blue-700 dark:text-gray-100" href="https://tailwindcomponents.com/component/trello-panel-clone" target="_blank">
+                            <a className="flex items-center text-blue-700 dark:text-gray-100" to="https://tailwindcomponents.com/component/trello-panel-clone" target="_blank">
                                 <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 <span className="inline-flex pl-2">Section: Task Summaries</span>
                             </a>
                         </li>
                         <li className="mt-2">
-                            <a className="flex items-center text-blue-700 dark:text-gray-100" href="https://windmill-dashboard.vercel.app/" target="_blank">
+                            <a className="flex items-center text-blue-700 dark:text-gray-100" to="https://windmill-dashboard.vercel.app/" target="_blank">
                                 <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 <span className="inline-flex pl-2">Section: Client Table</span>
                             </a>
                         </li>
                         <li className="mt-2">
-                            <a className="flex items-center text-blue-700 dark:text-gray-100" href="https://demos.creative-tim.com/notus-js/pages/admin/dashboard.html" target="_blank">
+                            <a className="flex items-center text-blue-700 dark:text-gray-100" to="https://demos.creative-tim.com/notus-js/pages/admin/dashboard.html" target="_blank">
                                 <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 <span className="inline-flex pl-2">Section: Social Traffic</span>
                             </a>
                         </li>
                         <li className="mt-2">
-                            <a className="flex items-center text-blue-700 dark:text-gray-100" href="https://mosaic.cruip.com" target="_blank">
+                            <a className="flex items-center text-blue-700 dark:text-gray-100" to="https://mosaic.cruip.com" target="_blank">
                                 <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 <span className="inline-flex pl-2">Section: Recent Activities</span>
                             </a>
                         </li>
                     </ul>
                 </div>
-            </div>
-            {/* </div> */}
+            </div> */}
+
         </>
     )
 }

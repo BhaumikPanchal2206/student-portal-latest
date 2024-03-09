@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Link from 'next/link'
+import { Link } from 'react-router-dom'
 import SVG from "react-inlinesvg"
 
 const links = {
@@ -16,17 +16,17 @@ const links = {
     ]
 }
 
-const main_links = [
-    { name: "Dashboard", href: "/dashboard", svg_icon: <SVG src='/assets/icons/home.svg' /> },
-    { name: "Board", href: "/board", svg_icon: <SVG src='/assets/icons/board.svg' /> },
-    { name: "Message", href: "/message", svg_icon: <SVG src='/assets/icons/message.svg' /> },
-    { name: "Notification", href: "/notification", svg_icon: <SVG src='/assets/icons/notification.svg' /> },
-]
+// const main_links = [
+//     { name: "Dashboard", href: "/dashboard", svg_icon: <SVG src='/assets/icons/home.svg' /> },
+//     { name: "Board", href: "/board", svg_icon: <SVG src='/assets/icons/board.svg' /> },
+//     { name: "Message", href: "/message", svg_icon: <SVG src='/assets/icons/message.svg' /> },
+//     { name: "Notification", href: "/notification", svg_icon: <SVG src='/assets/icons/notification.svg' /> },
+// ]
 
-const setting_link = [
-    { name: "Profile", href: "/profile", svg_icon: <SVG src='/assets/icons/user.svg' /> },
-    { name: "Settings", href: "/setting", svg_icon: <SVG src='/assets/icons/setting.svg' /> },
-]
+// const setting_link = [
+//     { name: "Profile", href: "/profile", svg_icon: <SVG src='/assets/icons/user.svg' /> },
+//     { name: "Settings", href: "/setting", svg_icon: <SVG src='/assets/icons/setting.svg' /> },
+// ]
 
 const SideBar = () => {
     return (
@@ -43,7 +43,7 @@ const SideBar = () => {
                                 </li>
                                 {links[ele].map((value, index) => (
                                     <li key={index}>
-                                        <Link href={value.href} className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                                        <Link to={value.href} className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                                             <span className="inline-flex justify-center items-center ml-4">
                                                 {value.svg_icon}
                                             </span>
@@ -52,7 +52,6 @@ const SideBar = () => {
                                     </li>
                                 ))}
                             </div>
-
                         ))}
                         {/* <li className="px-5 hidden md:block">
                             <div className="flex flex-row items-center h-8">
@@ -61,7 +60,7 @@ const SideBar = () => {
                         </li>
                         {main_links.map((ele, index) => (
                             <l={index}>
-                                <Link href={ele.href} className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                                <Link to={ele.href} className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                                     <span className="inline-flex justify-center items-center ml-4">
                                         {ele.svg_icon}
                                     </span>
@@ -71,7 +70,7 @@ const SideBar = () => {
                         ))} */}
 
                         {/* <li>
-                            <Link href="/" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                            <Link to="/" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                                 <span className="inline-flex justify-center items-center ml-4">
                                     <SVG src='/assets/icons/home.svg' />
                                 </span>
@@ -79,7 +78,7 @@ const SideBar = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                            <Link to="/" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                                 <span className="inline-flex justify-center items-center ml-4">
                                     <SVG src='/assets/icons/board.svg' />
                                 </span>
@@ -88,7 +87,7 @@ const SideBar = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                            <Link to="/" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                                 <span className="inline-flex justify-center items-center ml-4">
                                     <SVG src='/assets/icons/message.svg' />
                                 </span>
@@ -96,7 +95,7 @@ const SideBar = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                            <Link to="/" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                                 <span className="inline-flex justify-center items-center ml-4">
                                     <SVG src='/assets/icons/notification.svg' />
                                 </span>
@@ -112,7 +111,7 @@ const SideBar = () => {
                         </li>
                         {setting_link.map((ele, index) => (
                             <l={index}>
-                                <Link href={ele.href} className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                                <Link to={ele.href} className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                                     <span className="inline-flex justify-center items-center ml-4">
                                         {ele.svg_icon}
                                     </span>
@@ -121,7 +120,6 @@ const SideBar = () => {
                             </l=>
                         ))} */}
                     </ul>
-                    <p className="mb-14 px-5 py-3 hidden md:block text-center text-xs">Copyright @2021</p>
                 </div>
             </div>
         </div>

@@ -1,5 +1,7 @@
 import { Inter } from "next/font/google";
 import "@/styles/style.css";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +13,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
+      </head>
+      <body className={inter.className}>
+        <ToastContainer
+          pauseOnHover={false}
+          autoClose={2000}
+          theme='dark'
+        />
+        <main>
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
