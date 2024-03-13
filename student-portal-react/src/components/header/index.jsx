@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import SVG from "react-inlinesvg"
 import ConfirmationModal from '../shared/pop-up/confirmation-modal';
-import LogOut from '../shared/pop-up/log-out';
+import { UserDataContext } from '../../contexts/UserContext';
+// import LogOut from '../shared/pop-up/log-out';
 
 const Header = ({ isDark, setIsDark }) => {
     const [show, setShow] = useState(false);
+    const { userData } = useContext(UserDataContext);
 
 
     return (
@@ -14,10 +16,13 @@ const Header = ({ isDark, setIsDark }) => {
                 <div className="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-blue-800 dark:bg-gray-800 border-none">
                     <img
                         alt=''
-                        className="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden"
+                        className="hidden md:block w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden"
                         src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg"
                     />
-                    <span className="hidden md:block">Bhaumik Panchal</span>
+                    <span className="hidden md:block">{userData.user_fname} {userData.user_lname}</span>
+                    <div className='block md:hidden relative bg-gray-100 dark:bg-gray-900 w-9 h-9 sm:w-11 sm:h-11 rounded-full text-gray-800 dark:text-gray-100 text-lg sm:text-xl'>
+                        <p className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>{userData.user_fname.charAt(0).toUpperCase() + userData.user_lname.charAt(0).toUpperCase()}</p>
+                    </div>
                 </div>
                 <div className="flex justify-between items-center h-14 bg-blue-800 dark:bg-gray-800 header-right">
                     <div className="bg-white rounded flex items-center w-full max-w-xl mr-4 p-2 shadow-sm border border-gray-200">
@@ -61,8 +66,7 @@ const Header = ({ isDark, setIsDark }) => {
                     </ul>
                 </div>
             </div>
-            {/* <ConfirmationModal show={show} setShow={setShow} type="logout" /> */}
-            <LogOut show={show} setShow={setShow} />
+            <ConfirmationModal show={show} setShow={setShow} type="logout" />
         </>
     )
 }

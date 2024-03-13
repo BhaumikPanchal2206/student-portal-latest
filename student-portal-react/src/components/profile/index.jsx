@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
 
 import SVG from "react-inlinesvg"
+import fetchApi from '../../utils/helper';
+import { API_ENDPOINTS } from '../../constants/api';
+import dayjs from 'dayjs';
+import ProfileUpdateModal from '../shared/pop-up/profile-update-modal/idnex';
 // import dayjs from 'dayjs';
 
 const userDetails = [
-    { title: "First Name", value: "fname" },
-    { title: "Last Name", value: "lname" },
-    { title: "Email", value: "email" },
-    { title: "Password", value: "password" },
+    { title: "First Name", value: "user_fname" },
+    { title: "Last Name", value: "user_lname" },
+    { title: "Email", value: "user_email" },
+    { title: "Phone Number", value: "user_phone" },
 ];
 
 const Profile = () => {
@@ -23,16 +27,15 @@ const Profile = () => {
     async function fetchUserData() {
         setLoading(true);
         try {
-            let response = await fetch("http://localhost:3400/data")
-            let result = await response.json();
-            setUserData(result[0]);
+            let response = await fetchApi({ url: API_ENDPOINTS.USER, method: 'GET', isAuthRequired: true })
+            setUserData(response.data);
         } catch (error) {
             console.log(error)
         }
         setLoading(false);
     }
 
-    // const date = dayjs(userData.createdAt)
+    const date = dayjs(userData.createdAt)
 
 
     return (
@@ -54,9 +57,9 @@ const Profile = () => {
                                         <span className="ml-auto"><span
                                             className="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span></span>
                                     </li>
-                                    <li className="flex md:block lg:flex items-center py-3">
+                                    <li className="">
                                         <p>Member since</p>
-                                        {/* <p className="ml-auto"> {date.format("DD MMM ,YYYY")}</p> */}
+                                        <p className="ml-auto"> {date.format("DD MMM ,YYYY")}</p>
                                     </li>
                                 </ul>
                             </div >
@@ -90,7 +93,7 @@ const Profile = () => {
                         </div>
                     </div >
                 </div >
-                {/* <ProfileUpdateModal show={isProfileEdit} setShow={setIsProfileEdit} userData={userData} setUserData={setUserData} /> */}
+                <ProfileUpdateModal show={isProfileEdit} setShow={setIsProfileEdit} userData={userData} setUserData={setUserData} />
             </div >)
     )
 }

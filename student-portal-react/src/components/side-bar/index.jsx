@@ -6,9 +6,10 @@ import SVG from "react-inlinesvg"
 const links = {
     "Main": [
         { name: "Dashboard", href: "/dashboard", svg_icon: <SVG src='/assets/icons/home.svg' /> },
-        { name: "Exam", href: "/exam", svg_icon: <SVG src='/assets/icons/board.svg' /> },
+        { name: "Exam", href: "/exam/result", svg_icon: <SVG src='/assets/icons/board.svg' /> },
         { name: "Doubts", href: "/doubts", svg_icon: <SVG src='/assets/icons/message.svg' /> },
         { name: "Attendance", href: "/attendance", svg_icon: <SVG src='/assets/icons/notification.svg' /> },
+        { name: "Notes", href: "/notes", svg_icon: <i className="fa-solid fa-note-sticky"></i> },
     ],
     "Settings": [
         { name: "Profile", href: "/profile", svg_icon: <SVG src='/assets/icons/user.svg' /> },

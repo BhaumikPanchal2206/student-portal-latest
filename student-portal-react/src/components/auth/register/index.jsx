@@ -1,4 +1,4 @@
-import React, { createRef, useState } from 'react'
+import React, { createRef, useContext, useState } from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
 import AuthInput from '../../shared/form/auth-input';
@@ -9,8 +9,10 @@ import { Formik } from 'formik';
 import fetchApi from '../../../utils/helper';
 import { toast } from 'react-toastify';
 import { API_ENDPOINTS } from '../../../constants/api';
+import { UserDataContext } from '../../../contexts/UserContext';
 
 const SignUp = () => {
+    const { setUserData } = useContext(UserDataContext);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [otp, setOTP] = useState(new Array(4).fill(""));
@@ -62,6 +64,7 @@ const SignUp = () => {
                 localStorage.setItem("auth", response.token);
                 localStorage.setItem("userData", JSON.stringify(response.data));
                 navigate("/dashboard");
+                setUserData(response.data)
                 toast.success("registration Successfully");
                 setShowOTP(pre => !pre);
                 setUserEmail(values.user_email);
@@ -143,7 +146,7 @@ const SignUp = () => {
                             validationSchema={registrationValidation}
                         >
                             {formik => (
-                                <form onSubmit={formik.handleSubmit} className='flex w-[30rem] flex-col space-y-10'>
+                                <form onSubmit={formik.handleSubmit} className='flex w-full px-3 flex-col space-y-10'>
                                     <AuthInput formik={formik} name="user_fname" placeholder="Enter your first name" type="text" />
                                     <AuthInput formik={formik} name="user_lname" placeholder="Enter your last name" type="text" />
                                     <AuthInput formik={formik} name="user_phone" placeholder="Enter your Mobile Number" type="number" />

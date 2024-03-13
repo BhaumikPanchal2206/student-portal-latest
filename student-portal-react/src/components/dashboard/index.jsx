@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
+import { UserDataContext } from '../../contexts/UserContext';
 
 const dashboard_greet = {
     "first": [
@@ -13,6 +14,7 @@ const dashboard_greet = {
 }
 
 const Dashboard = () => {
+    const { userData } = useContext(UserDataContext);
 
     return (
         <>
@@ -25,12 +27,12 @@ const Dashboard = () => {
                                 src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
                         </div>
                         <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                            <h1 className="text-black dark:text-gray-100 text-lg md:text-2xl title-font font-bold mb-2">Welcome , Bhaumik Panchal</h1>
+                            <h1 className="text-black dark:text-gray-100 text-lg md:text-2xl title-font font-bold mb-2">Welcome , {userData.user_fname} {userData.user_lname}</h1>
                             <div className='lg:flex items-center sm:text-center font-bold text-gray-800'>
                                 {Object.keys(dashboard_greet).map((ele, index) => (
                                     <div key={index} className='w-full sm:flex items-center'>
                                         {dashboard_greet[ele].map((item, i) => (
-                                            <div key={index} className="w-full md:w-1/2 lg:w-full xl:w-1/4 mb-4 mx-auto">
+                                            <div key={i} className="w-full md:w-1/2 lg:w-full xl:w-1/4 mb-4 mx-auto">
                                                 <h2 className="text-gray-500 dark:text-gray-100">
                                                     {item.title}
                                                 </h2>
@@ -45,14 +47,13 @@ const Dashboard = () => {
                 </div>
             </section>
 
-            <div className='px-4 grid grid-cols-2 gap-4'>
+            <div className='px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                 <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
                     <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
                         Exam Result
                     </div>
                     <div className="py-4">
                         <h5 className="text-lg px-4 font-bold mb-2 text-black dark:text-white">Last Exam Result</h5>
-                        {/* <p className="text-gray-700 dark:text-gray-100 mb-4">With supporting text below as a natural lead-in to additional content.</p> */}
                         <div className="text-gray-700 px-4 dark:text-gray-100 mb-4 flex justify-between">
                             <div>
                                 <p className='font-semibold'>Marks</p>
@@ -71,17 +72,10 @@ const Dashboard = () => {
                             <i className="fa-solid fa-check mr-2"></i>
                             Pass
                         </div>
-                        {/* <div className='py-2 px-4 bg-red-100 text-black dark:text-black'>
-                            <i className="fa-solid fa-xmark mr-2"></i>
-                            Fail
-                        </div> */}
                         <div className='mt-3'>
                             <Link to="/exam/result" className="bg-blue-500 mx-4 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">Show Results</Link>
                         </div>
                     </div>
-                </div>
-                <div>
-
                 </div>
                 <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
                     <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
@@ -104,6 +98,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+
 
 
             {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">

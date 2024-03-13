@@ -23,40 +23,44 @@ import ExamResult from './components/exam/exam-result';
 import UpcomingExam from './components/exam/upcoming-exam';
 import ExamDetails from './components/exam/exam-id';
 import { ToastContainer } from 'react-toastify';
+import UserContext from './contexts/UserContext';
 
 function App() {
   return (
-    <BrowserRouter>
-      <ToastContainer pauseOnHover={false} autoClose={1000} position="top-left" />
-      <Routes>
+    <UserContext>
+      <BrowserRouter>
+        <ToastContainer pauseOnHover={false} autoClose={1000} position="top-left" />
+        <Routes>
 
-        {/* Auth Components */}
-        <Route path="/log-in" element={<LogIn />} />
-        <Route path="/register" element={<SignUp />} />
+          {/* Auth Components */}
+          <Route path="/log-in" element={<LogIn />} />
+          <Route path="/register" element={<SignUp />} />
 
-        {/* After Logged In */}
-        <Route path="/" element={<HomeLayout />} >
-          <Route index element={<Dashboard />} />
-          <Route path="announcements" element={<Announcements />} />
-          <Route path="attendance" element={<AttendancePage />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="note" element={<Notes />} />
-          <Route path="doubts" element={<DoubtPage />} />
-          <Route path="exam" element={<ExamLayout />} >
-            <Route index element={<ExamFees />} />
-            <Route path="exam-fees" element={<ExamFees />} />
-            <Route path="result" element={<ExamResult />} />
-            <Route path="upcoming-exam" element={<UpcomingExam />} />
-            <Route path="upcoming-exam/:examId" element={<ExamDetails />} />
-            {/* </Route> */}
+          {/* After Logged In */}
+          <Route path="/" element={<HomeLayout />} >
+            <Route index element={<Dashboard />} />
+            <Route path="announcements" element={<Announcements />} />
+            <Route path="attendance" element={<AttendancePage />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="note" element={<Notes />} />
+            <Route path="doubts" element={<DoubtPage />} />
+            <Route path="exam" element={<ExamLayout />} >
+              <Route index element={<ExamFees />} />
+              <Route path="exam-fees" element={<ExamFees />} />
+              <Route path="result" element={<ExamResult />} />
+              <Route path="upcoming-exam" element={<UpcomingExam />} />
+              <Route path="upcoming-exam/:examId" element={<ExamDetails />} />
+              {/* </Route> */}
+            </Route>
+            <Route path="profile" element={<Profile />} />
+            <Route path="settings" element={<SettingPage />} />
+            <Route path="notes" element={<Notes />} />
+
           </Route>
-          <Route path="profile" element={<Profile />} />
-          <Route path="settings" element={<SettingPage />} />
-
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </UserContext>
   );
 }
 

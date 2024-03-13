@@ -5,7 +5,7 @@ const dashboard_greet = {
         { title: "Class", description: <>12 <sup> th</sup></> },
         { title: "Division", description: "B" },
     ],
-    second: [
+    "second": [
         { title: "Enrollment Number", description: "2204030102106" },
         { title: <>Attendance<div>(last month)</div></>, description: "80%" },
     ]
@@ -28,7 +28,7 @@ const ExamResult = () => {
                                 {Object.keys(dashboard_greet).map((ele, index) => (
                                     <div key={index} className='w-full sm:flex items-center'>
                                         {dashboard_greet[ele].map((item, i) => (
-                                            <div key={index} className="w-full md:w-1/2 lg:w-full xl:w-1/4 mb-4 mx-auto">
+                                            <div key={i} className="w-full md:w-1/2 lg:w-full xl:w-1/4 mb-4 mx-auto">
                                                 <h2 className="text-gray-500 dark:text-gray-100">
                                                     {item.title}
                                                 </h2>
@@ -43,33 +43,36 @@ const ExamResult = () => {
                 </div>
             </section>
 
-            <table className="w-full text-left">
-                <thead>
-                    <tr className="text-xs font-semibold tracking-wide  text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                        <th className="px-4 py-3">{"date".toUpperCase()}</th>
-                        <th className="px-4 py-3">{"subject".toUpperCase()}</th>
-                        <th className="px-4 py-3">{"marks.".toUpperCase()}</th>
-                        <th className="px-4 py-3">{"total".toUpperCase()}</th>
-                        <th className="px-4 py-3">{"pass/fail".toUpperCase()}</th>
-                        <th className="px-4 py-3">{"percentage".toUpperCase()}</th>
-                    </tr>
-                </thead>
-                <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                    {[1, 2, 3, 4, 5].map((ele, index) => (
-                        <tr
-                            key={index}
-                            className={`bg-gray-50 cursor-pointer dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-200 ${""}`}
-                        >
-                            <td className='px-4 py-3'>15-1-2023</td>
-                            <td className='px-4 py-3'>English</td>
-                            <td className='px-4 py-3'>72</td>
-                            <td className='px-4 py-3'>100</td>
-                            <td className='px-4 py-3'>pass</td>
-                            <td className='px-4 py-3'>72%</td>
+            <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                    <thead>
+                        <tr className="text-xs font-semibold tracking-wide text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                            <th className="px-4 py-3">{"date".toUpperCase()}</th>
+                            <th className="px-4 py-3">{"subject".toUpperCase()}</th>
+                            <th className="px-4 py-3">{"marks".toUpperCase()}</th>
+                            <th className="px-4 py-3">{"total".toUpperCase()}</th>
+                            <th className="px-4 py-3">{"pass/fail".toUpperCase()}</th>
+                            <th className="px-4 py-3">{"percentage".toUpperCase()}</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                        {[1, 2, 3, 4, 5].map((ele, index) => (
+                            <tr
+                                key={index}
+                                className={`bg-gray-50 cursor-pointer dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-200 ${""}`}
+                            >
+                                <td className="px-4 py-3">15-1-2023</td>
+                                <td className="px-4 py-3">English</td>
+                                <td className="px-4 py-3">72</td>
+                                <td className="px-4 py-3">100</td>
+                                <td className="px-4 py-3">pass</td>
+                                <td className="px-4 py-3">72%</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     )
 }

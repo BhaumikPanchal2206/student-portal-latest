@@ -1,8 +1,9 @@
-export const register = { user_fname: "", user_lname: "", user_phone: "", user_email: "", user_pass: "", user_confirmPassword: "" }
+const register = { user_fname: "", user_lname: "", user_phone: "", user_email: "", user_pass: "", user_confirmPassword: "" }
 
-export const logIn = { user_email: "", user_pass: "" }
+const logIn = { user_email: "", user_pass: "" }
 
+const updateProfile = { user_fname: "", user_lname: "", user_phone: "", user_email: "", user_dob: "" }
 
-const VALUES = { logIn, register }
+const VALUES = { logIn, register, updateProfile }
 
 export default VALUES;
