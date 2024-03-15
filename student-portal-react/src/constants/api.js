@@ -5,4 +5,7 @@ export const API_ENDPOINTS = {
     REGISTER: `${API_BASE_URL}/register`,
 
     USER: `${API_BASE_URL}/user`,
+
+    ATTENDANCE: `${API_BASE_URL}/attendence`,
+    ATTENDANCE_LIST: `${API_BASE_URL}/attendence-list`,
 };

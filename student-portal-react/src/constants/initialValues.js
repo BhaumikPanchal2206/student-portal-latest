@@ -1,4 +1,4 @@
-const register = { user_fname: "", user_lname: "", user_phone: "", user_email: "", user_pass: "", user_confirmPassword: "" }
+const register = { user_fname: "", user_lname: "", user_phone: "", user_email: "", user_class: "", user_pass: "", user_confirmPassword: "" }
 
 const logIn = { user_email: "", user_pass: "" }
 

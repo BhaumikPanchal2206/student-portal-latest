@@ -2,13 +2,11 @@ import React, { useContext, useState } from 'react'
 
 import SVG from "react-inlinesvg"
 import ConfirmationModal from '../shared/pop-up/confirmation-modal';
-import { UserDataContext } from '../../contexts/UserContext';
 // import LogOut from '../shared/pop-up/log-out';
 
 const Header = ({ isDark, setIsDark }) => {
     const [show, setShow] = useState(false);
-    const { userData } = useContext(UserDataContext);
-
+    const userData = JSON.parse(localStorage.getItem('userData'))
 
     return (
         <>

@@ -50,7 +50,6 @@ function App() {
               <Route path="result" element={<ExamResult />} />
               <Route path="upcoming-exam" element={<UpcomingExam />} />
               <Route path="upcoming-exam/:examId" element={<ExamDetails />} />
-              {/* </Route> */}
             </Route>
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<SettingPage />} />

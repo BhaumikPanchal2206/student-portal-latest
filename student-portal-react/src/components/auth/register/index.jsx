@@ -11,42 +11,48 @@ import { toast } from 'react-toastify';
 import { API_ENDPOINTS } from '../../../constants/api';
 import { UserDataContext } from '../../../contexts/UserContext';
 
+const data1 = [
+    { text: "select className", value: 1 },
+    { text: "9", value: 9 },
+    { text: "10", value: 10 },
+];
+
 const SignUp = () => {
     const { setUserData } = useContext(UserDataContext);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    const [otp, setOTP] = useState(new Array(4).fill(""));
-    const otpInputs = Array.from({ length: 4 }, () => createRef());
-    const [showOTP, setShowOTP] = useState(false);
-    const [userEmail, setUserEmail] = useState("");
+    // const [otp, setOTP] = useState(new Array(4).fill(""));
+    // const otpInputs = Array.from({ length: 4 }, () => createRef());
+    // const [showOTP, setShowOTP] = useState(false);
+    // const [userEmail, setUserEmail] = useState("");
 
-    const handleChange = (e, index) => {
-        const value = e.target.value.replace(/\D/g, "");
-        const newValue = value.charAt(value.length - 1);
-        setOTP((prevOTP) => {
-            const newOTP = [...prevOTP];
-            newOTP[index] = newValue;
-            if (newValue !== "" && index < otpInputs.length - 1)
-                otpInputs[index + 1].current.focus();
-            return newOTP;
-        });
-    };
+    // const handleChange = (e, index) => {
+    //     const value = e.target.value.replace(/\D/g, "");
+    //     const newValue = value.charAt(value.length - 1);
+    //     setOTP((prevOTP) => {
+    //         const newOTP = [...prevOTP];
+    //         newOTP[index] = newValue;
+    //         if (newValue !== "" && index < otpInputs.length - 1)
+    //             otpInputs[index + 1].current.focus();
+    //         return newOTP;
+    //     });
+    // };
 
-    const handleBackSpace = (e, index) => {
-        if (e.key === "Backspace") {
-            if (index === otpInputs.length - 1 && otp[index] !== "") {
-                setOTP((pre) => {
-                    const oldOTP = [...pre];
-                    oldOTP[index] = "";
-                    return oldOTP;
-                });
-                return;
-            }
-            if (index > 0) {
-                otpInputs[index - 1].current.focus();
-            }
-        }
-    };
+    // const handleBackSpace = (e, index) => {
+    //     if (e.key === "Backspace") {
+    //         if (index === otpInputs.length - 1 && otp[index] !== "") {
+    //             setOTP((pre) => {
+    //                 const oldOTP = [...pre];
+    //                 oldOTP[index] = "";
+    //                 return oldOTP;
+    //             });
+    //             return;
+    //         }
+    //         if (index > 0) {
+    //             otpInputs[index - 1].current.focus();
+    //         }
+    //     }
+    // };
 
 
     const handleSubmit = async (values) => {
@@ -56,6 +62,7 @@ const SignUp = () => {
             user_lname: values.user_lname,
             user_email: values.user_email,
             user_pass: values.user_pass,
+            user_class: values.user_class,
             user_phone: String(values.user_phone),
         };
         try {
@@ -66,8 +73,8 @@ const SignUp = () => {
                 navigate("/dashboard");
                 setUserData(response.data)
                 toast.success("registration Successfully");
-                setShowOTP(pre => !pre);
-                setUserEmail(values.user_email);
+                // setShowOTP(pre => !pre);
+                // setUserEmail(values.user_email);
             } else {
                 toast.error(response.message);
             }
@@ -78,15 +85,15 @@ const SignUp = () => {
         }
     };
 
-    const handleOTPSubmit = (e) => {
-        e.preventDefault();
-        console.log(otp.join(""))
-    }
+    // const handleOTPSubmit = (e) => {
+    //     e.preventDefault();
+    //     console.log(otp.join(""))
+    // }
 
     return (
         <>
             <div className="mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white">
-                {showOTP ? (
+                {/* {showOTP ? (
                     <section className="flex w-[30rem] flex-col space-y-10 mx-auto">
                         <div className="text-center text-4xl font-medium">Email Verification</div>
                         <div className="text-center text-sm font-medium text-gray-400">
@@ -137,39 +144,46 @@ const SignUp = () => {
                             </div>
                         </form>
                     </section>
-                ) : (
-                    <section className="flex w-[30rem] flex-col space-y-10">
-                        <div className="text-center text-4xl font-medium">Register</div>
-                        <Formik
-                            onSubmit={handleSubmit}
-                            initialValues={VALUES.register}
-                            validationSchema={registrationValidation}
+                ) : ( */}
+                <section className="flex w-[30rem] flex-col space-y-10">
+                    <div className="text-center text-4xl font-medium">Register</div>
+                    <Formik
+                        onSubmit={handleSubmit}
+                        initialValues={VALUES.register}
+                        validationSchema={registrationValidation}
+                    >
+                        {formik => (
+                            <form onSubmit={formik.handleSubmit} className='flex w-full px-3 flex-col space-y-10'>
+                                <AuthInput formik={formik} name="user_fname" placeholder="Enter your first name" type="text" />
+                                <AuthInput formik={formik} name="user_lname" placeholder="Enter your last name" type="text" />
+                                <AuthInput formik={formik} name="user_phone" placeholder="Enter your Mobile Number" type="number" />
+                                <AuthInput formik={formik} name="user_email" placeholder="Enter your email" type="email" />
+                                {/* <div className=""> */}
+                                <select value={formik.values.user_class} onChange={formik.handleChange} id='user_class' name='user_class' className="p-2 rounded bg-gray-800 w-full ">
+                                    {data1.map((ele, index) => (
+                                        <option key={index} value={ele.value}>{ele.text}</option>
+                                    ))}
+                                </select>
+                                {/* </div> */}
+                                <AuthInput formik={formik} name="user_pass" placeholder="Enter password" type="password" />
+                                <AuthInput formik={formik} name="user_confirmPassword" placeholder="confirm password" type="password" />
+                                <button type='submit' className="transform rounded-sm bg-indigo-600 py-2 font-bold duration-300 hover:bg-indigo-400">
+                                    {loading ? "REGISTER" : <div className="animate-spin me-2"><i className="fa-solid fa-spinner"></i></div>}
+                                </button>
+                            </form>
+                        )}
+                    </Formik>
+                    <div className="text-center text-lg">
+                        Already exist?
+                        <Link
+                            to="/log-in"
+                            className="ms-1 font-medium text-indigo-500 underline-offset-4 hover:underline"
                         >
-                            {formik => (
-                                <form onSubmit={formik.handleSubmit} className='flex w-full px-3 flex-col space-y-10'>
-                                    <AuthInput formik={formik} name="user_fname" placeholder="Enter your first name" type="text" />
-                                    <AuthInput formik={formik} name="user_lname" placeholder="Enter your last name" type="text" />
-                                    <AuthInput formik={formik} name="user_phone" placeholder="Enter your Mobile Number" type="number" />
-                                    <AuthInput formik={formik} name="user_email" placeholder="Enter your email" type="email" />
-                                    <AuthInput formik={formik} name="user_pass" placeholder="Enter password" type="password" />
-                                    <AuthInput formik={formik} name="user_confirmPassword" placeholder="confirm password" type="password" />
-                                    <button type='submit' className="transform rounded-sm bg-indigo-600 py-2 font-bold duration-300 hover:bg-indigo-400">
-                                        {loading ? "REGISTER" : <div className="animate-spin me-2"><i className="fa-solid fa-spinner"></i></div>}
-                                    </button>
-                                </form>
-                            )}
-                        </Formik>
-                        <div className="text-center text-lg">
-                            Already exist?
-                            <Link
-                                to="/log-in"
-                                className="ms-1 font-medium text-indigo-500 underline-offset-4 hover:underline"
-                            >
-                                log in
-                            </Link>
-                        </div>
-                    </section>
-                )}
+                            log in
+                        </Link>
+                    </div>
+                </section>
+                {/* )} */}
             </div>
         </>
     )

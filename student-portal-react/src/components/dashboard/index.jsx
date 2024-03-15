@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
-import { UserDataContext } from '../../contexts/UserContext';
 
 const dashboard_greet = {
     "first": [
@@ -14,7 +13,7 @@ const dashboard_greet = {
 }
 
 const Dashboard = () => {
-    const { userData } = useContext(UserDataContext);
+    const userData = JSON.parse(localStorage.getItem('userData'));
 
     return (
         <>
@@ -73,7 +72,9 @@ const Dashboard = () => {
                             Pass
                         </div>
                         <div className='mt-3'>
-                            <Link to="/exam/result" className="bg-blue-500 mx-4 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">Show Results</Link>
+                            <Link to="/exam/result" className="bg-blue-500 mx-4 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
+                                Show Results
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -84,7 +85,9 @@ const Dashboard = () => {
                     <div className="p-4">
                         <h5 className="text-lg font-bold mb-2 text-black dark:text-white">Last Exam Result</h5>
                         <p className="text-gray-700 dark:text-gray-100 mb-4">With supporting text below as a natural lead-in to additional content.</p>
-                        <Link to="/exam/result" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">Show Results</Link>
+                        <Link to="/exam/result" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
+                            Show Results
+                        </Link>
                     </div>
                 </div>
                 <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
@@ -94,7 +97,9 @@ const Dashboard = () => {
                     <div className="p-4">
                         <h5 className="text-lg font-bold mb-2 text-black dark:text-white">26 January</h5>
                         <p className="text-gray-700 dark:text-gray-100 mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem, veritatis.</p>
-                        <Link to="/announcements" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">Show Results</Link>
+                        <Link to="/announcements" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
+                            View all
+                        </Link>
                     </div>
                 </div>
             </div>
