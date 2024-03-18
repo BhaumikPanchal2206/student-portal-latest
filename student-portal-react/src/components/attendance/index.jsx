@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import fetchApi from '../../utils/helper';
 import { API_ENDPOINTS } from '../../constants/api';
 import dayjs from 'dayjs';
@@ -23,6 +23,14 @@ const AttendancePage = () => {
     const [className, setClassName] = useState("");
     const [studentData, setStudentData] = useState([])
 
+    useEffect(async () => {
+        if (userData.user_role === "student") {
+            const response = await fetchApi({ url: API_ENDPOINTS.ATTENDANCE, method: 'GET', isAuthRequired: true });
+            setStudentData(response.data)
+        }
+    }, [])
+
+
     const handelChangeClass = async (e) => {
         setClassName(e.target.value)
         const response = await fetchApi({ url: API_ENDPOINTS.ATTENDANCE_LIST, method: 'POST', isAuthRequired: true, data: { user_class: e.target.value } });
@@ -31,10 +39,6 @@ const AttendancePage = () => {
 
     const handleAttendance = async (present) => {
         let date = dayjs();
-        // if (present === "present") {
-        //     console.log("first")
-        //     setSelectStudent(selectStudent.map(ele => ({ ...ele, isPresent: true })))
-        // }
         const response = await fetchApi({
             url: API_ENDPOINTS.ATTENDANCE, method: 'POST', isAuthRequired: true,
             data: {
@@ -60,13 +64,15 @@ const AttendancePage = () => {
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                                    <td className='px-4 py-3'>11-01-2024</td>
-                                    <td className='px-4 py-3'>Present</td>
-                                    <td className='px-4 py-3'>6:10 PM</td>
-                                    <td className='px-4 py-3'>8:35 PM</td>
-                                </tr>
-                                <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                {studentData.map((ele, index) => (
+                                    <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                        <td className='px-4 py-3'>11-01-2024</td>
+                                        <td className='px-4 py-3'>Present</td>
+                                        <td className='px-4 py-3'>6:10 PM</td>
+                                        <td className='px-4 py-3'>8:35 PM</td>
+                                    </tr>
+                                ))}
+                                {/* <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
                                     <td className='px-4 py-3'>10-01-2024</td>
                                     <td className='px-4 py-3'>Present</td>
                                     <td className='px-4 py-3'>6:10 PM</td>
@@ -83,7 +89,7 @@ const AttendancePage = () => {
                                     <td className='px-4 py-3'>Present</td>
                                     <td className='px-4 py-3'>6:10 PM</td>
                                     <td className='px-4 py-3'>8:35 PM</td>
-                                </tr>
+                                </tr> */}
                             </tbody>
                         </table>
                     </div>
