@@ -1,12 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Link } from 'react-router-dom'
 import SVG from "react-inlinesvg"
-import AddDoubtForm from '../shared/pop-up/doubt-add-form'
+import AddDoubtForm from '../../shared/pop-up/doubt-add-form'
+import fetchApi from '../../../utils/helper'
+import { API_ENDPOINTS } from '../../../constants/api'
+import { toast } from 'react-toastify'
 
 const DoubtPage = () => {
     const [show, setShow] = useState(false);
     const userData = JSON.parse(localStorage.getItem('userData'));
+
+    useEffect(() => {
+        fetchDoubts();
+    }, [])
+
+
+    const fetchDoubts = async () => {
+        try {
+            let response = await fetchApi({ url: API_ENDPOINTS.DOUBTS_STUDENT, isAuthRequired: true, method: "GET" })
+            console.log(response)
+        } catch (error) {
+            toast.error("Error to fetch Doubt list")
+        }
+    }
 
     return (
         <>
@@ -23,7 +40,7 @@ const DoubtPage = () => {
                     </div>
                     {show && <AddDoubtForm setShow={setShow} />}
 
-                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
                         {[1, 2, 3].map((_, index) => (
                             <div key={index} className="max-w-2xl mx-auto sm:px-6 lg:px-8 sm:py-6 lg:py-8">
                                 <div className="overflow-hidden shadow-md">
@@ -41,7 +58,7 @@ const DoubtPage = () => {
                                             <i className="fa-solid fa-trash text-red-500 cursor-pointer" onClick={() => setShow(true)}></i>
                                         </div>
                                         <Link className="bg-blue-500 shadow-md text-sm text-white font-bold py-3 md:px-8 px-4 hover:bg-blue-400 dark:text-gray-800 dark:bg-gray-100 dark:hover:bg-gray-200 rounded uppercase"
-                                            href="/doubts">Show full</Link>
+                                            href={`/doubts`}>Show full</Link>
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +83,7 @@ const DoubtPage = () => {
                                         <Link className="bg-blue-500 shadow-md text-sm text-white font-bold py-3 md:px-8 px-4 hover:bg-blue-400 dark:text-gray-800 dark:bg-gray-100 dark:hover:bg-gray-200 rounded uppercase"
                                             href="/doubts">Show full</Link>
                                         <button className="bg-blue-500 shadow-md text-sm text-white font-bold py-3 md:px-8 px-4 hover:bg-blue-400 dark:text-gray-800 dark:bg-gray-100 dark:hover:bg-gray-200 rounded uppercase"
-                                            >Answer</button>
+                                        >Answer</button>
                                     </div>
                                 </div>
                             </div>

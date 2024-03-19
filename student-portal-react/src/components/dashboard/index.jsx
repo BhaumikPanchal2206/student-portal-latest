@@ -1,19 +1,21 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 
-const dashboard_greet = {
-    "first": [
-        { title: "Class", description: <>12 <sup> th</sup></> },
-        { title: "Division", description: "B" },
-    ],
-    "second": [
-        { title: "Enrollment Number", description: "2204030102106" },
-        { title: <>Attendance<div>(last month)</div></>, description: "80%" },
-    ]
-}
 
 const Dashboard = () => {
     const userData = JSON.parse(localStorage.getItem('userData'));
+
+
+    // const dashboard_greet = {
+    //     "first": [
+    //         { title: "Class", description: <>{userData.user_class} <sup> th</sup></> },
+    //         { title: "Division", description: "B" },
+    //     ],
+    //     "second": [
+    //         { title: "Enrollment Number", description: "2204030102106" },
+    //         { title: <>Attendance<div>(last month)</div></>, description: "80%" },
+    //     ]
+    // }
 
     return (
         <>
@@ -26,8 +28,10 @@ const Dashboard = () => {
                                 src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
                         </div>
                         <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                            <h1 className="text-black dark:text-gray-100 text-lg md:text-2xl title-font font-bold mb-2">Welcome , {userData.user_fname} {userData.user_lname}</h1>
-                            <div className='lg:flex items-center sm:text-center font-bold text-gray-800'>
+                            <h1 className="text-black dark:text-gray-100 text-lg md:text-4xl title-font font-bold mb-2">
+                                Welcome ,{userData.user_role === "teacher" && " Prof."} {userData.user_fname} {userData.user_lname}
+                            </h1>
+                            {/* <div className='lg:flex items-center sm:text-center font-bold text-gray-800'>
                                 {Object.keys(dashboard_greet).map((ele, index) => (
                                     <div key={index} className='w-full sm:flex items-center'>
                                         {dashboard_greet[ele].map((item, i) => (
@@ -40,69 +44,102 @@ const Dashboard = () => {
                                         ))}
                                     </div>
                                 ))}
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
             </section>
 
-            <div className='px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
-                    <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
-                        Exam Result
-                    </div>
-                    <div className="py-4">
-                        <h5 className="text-lg px-4 font-bold mb-2 text-black dark:text-white">Last Exam Result</h5>
-                        <div className="text-gray-700 px-4 dark:text-gray-100 mb-4 flex justify-between">
-                            <div>
-                                <p className='font-semibold'>Marks</p>
-                                <p className='text-gray-600 dark:text-gray-100'>72</p>
+            {
+                userData.user_role === "teacher" ? (
+                    <div className='px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                        <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
+                            <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
+                                <i className="fa-solid fa-bullhorn me-4"></i>Announcements
                             </div>
-                            <div>
-                                <p className='font-semibold'>Passing Marks</p>
-                                <p className='text-gray-600 dark:text-gray-100'>33</p>
-                            </div>
-                            <div>
-                                <p className='font-semibold'>Total Marks</p>
-                                <p className='text-gray-600 dark:text-gray-100'>100</p>
+                            <div className="p-4">
+                                <p className="text-gray-700 dark:text-gray-100 mb-4">
+                                    You can add exam for any standard
+                                </p>
+                                <Link to="/announcements" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
+                                    Add New Exam
+                                </Link>
                             </div>
                         </div>
-                        <div className='py-2 px-4 bg-green-100 text-black dark:text-black'>
-                            <i className="fa-solid fa-check mr-2"></i>
-                            Pass
+                        <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
+                            <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
+                                <i className="fa-solid fa-bullhorn me-4"></i>Announcements
+                            </div>
+                            <div className="p-4">
+                                <p className="text-gray-700 dark:text-gray-100 mb-4">
+                                    Add a new announcement for any future event or any important work
+                                </p>
+                                <Link to="/announcements" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
+                                    Add Announcements
+                                </Link>
+                            </div>
                         </div>
-                        <div className='mt-3'>
-                            <Link to="/exam/result" className="bg-blue-500 mx-4 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
-                                Show Results
-                            </Link>
+                    </div>
+                ) : (
+                    <div className='px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                        <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
+                            <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
+                                Exam Result
+                            </div>
+                            <div className="py-4">
+                                <h5 className="text-lg px-4 font-bold mb-2 text-black dark:text-white">Last Exam Result</h5>
+                                <div className="text-gray-700 px-4 dark:text-gray-100 mb-4 flex justify-between">
+                                    <div>
+                                        <p className='font-semibold'>Marks</p>
+                                        <p className='text-gray-600 dark:text-gray-100'>72</p>
+                                    </div>
+                                    <div>
+                                        <p className='font-semibold'>Passing Marks</p>
+                                        <p className='text-gray-600 dark:text-gray-100'>33</p>
+                                    </div>
+                                    <div>
+                                        <p className='font-semibold'>Total Marks</p>
+                                        <p className='text-gray-600 dark:text-gray-100'>100</p>
+                                    </div>
+                                </div>
+                                <div className='py-2 px-4 bg-green-100 text-black dark:text-black'>
+                                    <i className="fa-solid fa-check mr-2"></i>
+                                    Pass
+                                </div>
+                                <div className='mt-3'>
+                                    <Link to="/exam/result" className="bg-blue-500 mx-4 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
+                                        Show Results
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
+                            <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
+                                Featured
+                            </div>
+                            <div className="p-4">
+                                <h5 className="text-lg font-bold mb-2 text-black dark:text-white">Last Exam Result</h5>
+                                <p className="text-gray-700 dark:text-gray-100 mb-4">With supporting text below as a natural lead-in to additional content.</p>
+                                <Link to="/exam/result" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
+                                    Show Results
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
+                            <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
+                                <i className="fa-solid fa-bullhorn me-4"></i>Announcements
+                            </div>
+                            <div className="p-4">
+                                <h5 className="text-lg font-bold mb-2 text-black dark:text-white">26 January</h5>
+                                <p className="text-gray-700 dark:text-gray-100 mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem, veritatis.</p>
+                                <Link to="/announcements" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
+                                    View all
+                                </Link>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
-                    <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
-                        Featured
-                    </div>
-                    <div className="p-4">
-                        <h5 className="text-lg font-bold mb-2 text-black dark:text-white">Last Exam Result</h5>
-                        <p className="text-gray-700 dark:text-gray-100 mb-4">With supporting text below as a natural lead-in to additional content.</p>
-                        <Link to="/exam/result" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
-                            Show Results
-                        </Link>
-                    </div>
-                </div>
-                <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
-                    <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
-                        <i className="fa-solid fa-bullhorn me-4"></i>Announcements
-                    </div>
-                    <div className="p-4">
-                        <h5 className="text-lg font-bold mb-2 text-black dark:text-white">26 January</h5>
-                        <p className="text-gray-700 dark:text-gray-100 mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem, veritatis.</p>
-                        <Link to="/announcements" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
-                            View all
-                        </Link>
-                    </div>
-                </div>
-            </div>
+                )
+            }
 
 
 

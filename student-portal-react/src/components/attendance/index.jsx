@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import fetchApi from '../../utils/helper';
 import { API_ENDPOINTS } from '../../constants/api';
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
 
 const data1 = [
     { text: "select className", value: 1 },
@@ -23,77 +24,77 @@ const AttendancePage = () => {
     const [className, setClassName] = useState("");
     const [studentData, setStudentData] = useState([])
 
-    useEffect(async () => {
-        if (userData.user_role === "student") {
-            const response = await fetchApi({ url: API_ENDPOINTS.ATTENDANCE, method: 'GET', isAuthRequired: true });
-            setStudentData(response.data)
-        }
+    useEffect(() => {
+        fetchStudentData();
     }, [])
 
+    const fetchStudentData = async () => {
+        try {
+            if (userData.user_role === "student") {
+                const response = await fetchApi({ url: API_ENDPOINTS.ATTENDANCE, method: 'GET', isAuthRequired: true });
+                setStudentData(response.data)
+            }
+        } catch (error) {
+            toast.error("Error to fetch student data")
+        }
+    }
 
     const handelChangeClass = async (e) => {
         setClassName(e.target.value)
-        const response = await fetchApi({ url: API_ENDPOINTS.ATTENDANCE_LIST, method: 'POST', isAuthRequired: true, data: { user_class: e.target.value } });
-        setStudentData(response.data)
+        try {
+            const response = await fetchApi({ url: API_ENDPOINTS.ATTENDANCE_LIST, method: 'POST', isAuthRequired: true, data: { user_class: e.target.value } });
+            setStudentData(response.data)
+        } catch (error) {
+            toast.error("Error to fetch attendance list")
+        }
     }
 
     const handleAttendance = async (present) => {
         let date = dayjs();
-        const response = await fetchApi({
-            url: API_ENDPOINTS.ATTENDANCE, method: 'POST', isAuthRequired: true,
-            data: {
-                atten_date: date.format("DD/MM/YY"),
-                stud_ids: present === "present" ? selectStudent.map(ele => ({ ...ele, isPresent: true })) : selectStudent
-            }
-        });
-
+        try {
+            const response = await fetchApi({
+                url: API_ENDPOINTS.ATTENDANCE, method: 'POST', isAuthRequired: true,
+                data: {
+                    atten_date: date.format("DD/MM/YY"),
+                    stud_ids: present === "present" ? selectStudent.map(ele => ({ ...ele, isPresent: true })) : selectStudent
+                }
+            });
+        } catch (error) {
+            toast.error("Error to add attendacne")
+        }
     }
 
     return (
         <>
             {userData.user_role === "student" ? (
-                <div className='p-4'>
-                    <div className="overflow-x-auto">
-                        <table className="w-full">
-                            <thead>
-                                <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                                    <th className="px-4 py-3">{"Date".toUpperCase()}</th>
-                                    <th className="px-4 py-3">{"Attendance".toUpperCase()}</th>
-                                    <th className="px-4 py-3">{"Punch In Time".toUpperCase()}</th>
-                                    <th className="px-4 py-3">{"Punch Out Time".toUpperCase()}</th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                {studentData.map((ele, index) => (
-                                    <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                                        <td className='px-4 py-3'>11-01-2024</td>
-                                        <td className='px-4 py-3'>Present</td>
-                                        <td className='px-4 py-3'>6:10 PM</td>
-                                        <td className='px-4 py-3'>8:35 PM</td>
+                studentData.length === 0 ? (
+                    <div>No data added</div>
+                ) : (
+                    <div className='p-4'>
+                        <div className="overflow-x-auto">
+                            <table className="w-full">
+                                <thead>
+                                    <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                        <th className="px-4 py-3">{"Date".toUpperCase()}</th>
+                                        <th className="px-4 py-3">{"Attendance".toUpperCase()}</th>
+                                        <th className="px-4 py-3">{"Punch In Time".toUpperCase()}</th>
+                                        <th className="px-4 py-3">{"Punch Out Time".toUpperCase()}</th>
                                     </tr>
-                                ))}
-                                {/* <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                                    <td className='px-4 py-3'>10-01-2024</td>
-                                    <td className='px-4 py-3'>Present</td>
-                                    <td className='px-4 py-3'>6:10 PM</td>
-                                    <td className='px-4 py-3'>8:35 PM</td>
-                                </tr>
-                                <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                                    <td className='px-4 py-3'>09-01-2024</td>
-                                    <td className='px-4 py-3'>Present</td>
-                                    <td className='px-4 py-3'>6:10 PM</td>
-                                    <td className='px-4 py-3'>8:35 PM</td>
-                                </tr>
-                                <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                                    <td className='px-4 py-3'>08-01-2024</td>
-                                    <td className='px-4 py-3'>Present</td>
-                                    <td className='px-4 py-3'>6:10 PM</td>
-                                    <td className='px-4 py-3'>8:35 PM</td>
-                                </tr> */}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                                    {studentData.map((ele, index) => (
+                                        <tr key={index} className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                            <td className='px-4 py-3'>{ele.atten_date}</td>
+                                            <td className='px-4 py-3'>{ele.atten_isPresent ? "Present" : "Absent"}</td>
+                                            <td className='px-4 py-3'>6:00 PM</td>
+                                            <td className='px-4 py-3'>8:00 PM</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                )
             ) : (
                 <>
                     <form action="">
@@ -141,11 +142,6 @@ const AttendancePage = () => {
                                                         key={index}
                                                         className={`bg-gray-50 cursor-pointer dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400 ${""}`}
                                                         onClick={() => {
-                                                            // console.log(selectStudent.findIndex((e) => {
-                                                            //     console.log(e)
-                                                            //     console.log(e.id, ele._id)
-                                                            //     return e.id === ele._id
-                                                            // }))
                                                             setSelectStudent(pre => {
                                                                 let a = [...pre];
                                                                 if (pre.find(e => e.id === ele._id)) {

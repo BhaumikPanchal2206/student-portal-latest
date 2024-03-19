@@ -1,20 +1,11 @@
 import React from 'react'
 
-const dashboard_greet = {
-    "first": [
-        { title: "Class", description: <>12 <sup> th</sup></> },
-        { title: "Division", description: "B" },
-    ],
-    "second": [
-        { title: "Enrollment Number", description: "2204030102106" },
-        { title: <>Attendance<div>(last month)</div></>, description: "80%" },
-    ]
-}
-
 const ExamResult = () => {
+    const userData = JSON.parse(localStorage.getItem('userData'))
+
     return (
         <div className='py-2 px-3'>
-            <section className="text-gray-600 dark:text-white body-font pt-10">
+            <section className="text-gray-600 dark:text-white body-font pt-10 px-4">
                 <div className="mx-auto">
                     <div className="p-5 bg-white dark:bg-gray-800 flex items-center !mx-auto border-b  mb-10 border-gray-200 dark:border-gray-800 rounded-lg sm:flex-row flex-col">
                         <div className="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center flex-shrink-0">
@@ -23,21 +14,9 @@ const ExamResult = () => {
                                 src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
                         </div>
                         <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                            <h1 className="text-black dark:text-gray-100 text-lg md:text-2xl title-font font-bold mb-2">Welcome , Bhaumik Panchal</h1>
-                            <div className='lg:flex items-center sm:text-center font-bold text-gray-800'>
-                                {Object.keys(dashboard_greet).map((ele, index) => (
-                                    <div key={index} className='w-full sm:flex items-center'>
-                                        {dashboard_greet[ele].map((item, i) => (
-                                            <div key={i} className="w-full md:w-1/2 lg:w-full xl:w-1/4 mb-4 mx-auto">
-                                                <h2 className="text-gray-500 dark:text-gray-100">
-                                                    {item.title}
-                                                </h2>
-                                                <p className='dark:text-gray-100'>{item.description}</p>
-                                            </div>
-                                        ))}
-                                    </div>
-                                ))}
-                            </div>
+                            <h1 className="text-black dark:text-gray-100 text-lg md:text-4xl title-font font-bold mb-2">
+                                Welcome , {userData.user_fname} {userData.user_lname}
+                            </h1>
                         </div>
                     </div>
                 </div>

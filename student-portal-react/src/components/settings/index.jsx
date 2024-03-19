@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { toast } from 'react-toastify'
 import InputComponent from '../shared/form/input-component'
 import { Formik } from 'formik'
+import ConfirmationModal from '../shared/pop-up/confirmation-modal'
 
 
 const SettingPage = () => {
+    const [show, setShow] = useState(false)
+
+
     return (
         <>
             <div className='divide-y-2 divide-blue-600 dark:divide-black'>
@@ -43,12 +46,13 @@ const SettingPage = () => {
                     </div>
                     <form className="p-6 flex flex-col justify-center col-span-2">
                         {/* <InputComponent type="password" label="Your password" name="yourpass" id="yourpass" placeholder="Your Password" /> */}
-                        <button onClick={() => toast.success("Logged out")} type="button" className="md:w-32 bg-blue-600 dark:bg-gray-100 text-white dark:text-gray-800 font-bold py-3 px-6 rounded-lg mt-2 hover:bg-blue-500 dark:hover:bg-gray-200 transition ease-in-out duration-300">
+                        <button onClick={() => setShow(true)} type="button" className="md:w-32 bg-blue-600 dark:bg-gray-100 text-white dark:text-gray-800 font-bold py-3 px-6 rounded-lg mt-2 hover:bg-blue-500 dark:hover:bg-gray-200 transition ease-in-out duration-300">
                             Log out
                         </button>
                     </form>
                 </div>
             </div>
+            <ConfirmationModal show={show} setShow={setShow} type="logout" />
         </>
     )
 }

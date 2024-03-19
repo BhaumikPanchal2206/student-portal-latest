@@ -16,7 +16,7 @@ import Profile from './components/profile';
 import SettingPage from './components/settings';
 import AttendancePage from './components/attendance';
 import Notes from './components/note';
-import DoubtPage from './components/doubts';
+import DoubtPage from './components/doubts/doubt-page';
 import ExamLayout from './components/exam/exam-layout';
 import ExamFees from './components/exam/exam-fees';
 import ExamResult from './components/exam/exam-result';
@@ -24,6 +24,9 @@ import UpcomingExam from './components/exam/upcoming-exam';
 import ExamDetails from './components/exam/exam-id';
 import { ToastContainer } from 'react-toastify';
 import UserContext from './contexts/UserContext';
+import ProtectedRoute from './components/protected';
+import DoubtLayout from './components/doubts/doubt-layout';
+import DoubtAnswer from './components/doubts/doubt-answer';
 
 function App() {
   return (
@@ -33,28 +36,35 @@ function App() {
         <Routes>
 
           {/* Auth Components */}
-          <Route path="/log-in" element={<LogIn />} />
-          <Route path="/register" element={<SignUp />} />
+          <Route path="/" element={<ProtectedRoute />}>
+            <Route index element={<LogIn />} />
+            <Route path="/log-in" element={<LogIn />} />
+            <Route path="/register" element={<SignUp />} />
+          </Route>
 
           {/* After Logged In */}
-          <Route path="/" element={<HomeLayout />} >
-            <Route index element={<Dashboard />} />
-            <Route path="announcements" element={<Announcements />} />
-            <Route path="attendance" element={<AttendancePage />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="note" element={<Notes />} />
-            <Route path="doubts" element={<DoubtPage />} />
-            <Route path="exam" element={<ExamLayout />} >
-              <Route index element={<ExamFees />} />
-              <Route path="exam-fees" element={<ExamFees />} />
-              <Route path="result" element={<ExamResult />} />
-              <Route path="upcoming-exam" element={<UpcomingExam />} />
-              <Route path="upcoming-exam/:examId" element={<ExamDetails />} />
+          <Route path="/" element={<ProtectedRoute />}>
+            <Route path="/" element={<HomeLayout />} >
+              <Route index element={<Dashboard />} />
+              <Route path="announcements" element={<Announcements />} />
+              <Route path="attendance" element={<AttendancePage />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="note" element={<Notes />} />
+              <Route path="doubts" element={<DoubtLayout />}>
+                <Route path="doubt" element={<DoubtPage />} />
+                <Route path="answer" element={<DoubtAnswer />} />
+              </Route>
+              <Route path="exam" element={<ExamLayout />} >
+                <Route index element={<ExamFees />} />
+                <Route path="exam-fees" element={<ExamFees />} />
+                <Route path="result" element={<ExamResult />} />
+                <Route path="upcoming-exam" element={<UpcomingExam />} />
+                <Route path="upcoming-exam/:examId" element={<ExamDetails />} />
+              </Route>
+              <Route path="profile" element={<Profile />} />
+              <Route path="settings" element={<SettingPage />} />
+              <Route path="notes" element={<Notes />} />
             </Route>
-            <Route path="profile" element={<Profile />} />
-            <Route path="settings" element={<SettingPage />} />
-            <Route path="notes" element={<Notes />} />
-
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

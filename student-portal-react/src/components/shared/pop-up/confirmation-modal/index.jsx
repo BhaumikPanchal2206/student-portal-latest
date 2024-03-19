@@ -16,9 +16,8 @@ const ConfirmationModal = ({ show, setShow, type }) => {
         //     if (type === "logOut") {
         localStorage.removeItem("userData");
         localStorage.removeItem("auth");
-        navigate("/logIn");
+        navigate("/log-in");
         toast.success("Log Out Successfully");
-        navigate("/log-in")
         //     } else {
         //         await handleSubmit(data);
         //     }
