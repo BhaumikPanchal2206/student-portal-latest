@@ -19,4 +19,5 @@ export const API_ENDPOINTS = {
 
     // Exam
     EXAM: `${API_BASE_URL}/exam`,
+    EXAM_ALL: `${API_BASE_URL}/exam-all`,
 };

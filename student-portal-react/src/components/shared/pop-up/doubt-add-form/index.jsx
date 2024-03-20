@@ -7,7 +7,7 @@ import fetchApi from '../../../../utils/helper';
 import { API_ENDPOINTS } from '../../../../constants/api';
 import { toast } from 'react-toastify';
 
-const AddDoubtForm = ({ setShow }) => {
+const AddDoubtForm = ({ setShow, setDoubts }) => {
     const [loading, setLoading] = useState(true);
 
 
@@ -16,8 +16,12 @@ const AddDoubtForm = ({ setShow }) => {
         // let post_data = { ...values, dt_isAnswerd: false, dt_answer: false }
         try {
             let response = await fetchApi({ url: API_ENDPOINTS.DOUBTS_STUDENT, method: "POST", isAuthRequired: true, data: values })
-            console.log(response);
+            // console.log(response);
             setLoading(true);
+            let res = await fetchApi({ url: API_ENDPOINTS.DOUBTS_STUDENT, method: "GET", isAuthRequired: true })
+            setDoubts(res.data)
+            setShow(false);
+            toast.success("Doubts Added Ssuccessfully!")
         } catch (error) {
             toast.error("Error to fetch Student doubt")
         }

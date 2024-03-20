@@ -55,7 +55,7 @@ const Dashboard = () => {
                     <div className='px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                         <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
                             <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
-                                <i className="fa-solid fa-bullhorn me-4"></i>Announcements
+                                Add New Exam
                             </div>
                             <div className="p-4">
                                 <p className="text-gray-700 dark:text-gray-100 mb-4">

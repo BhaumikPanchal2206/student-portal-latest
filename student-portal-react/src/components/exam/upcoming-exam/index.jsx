@@ -19,6 +19,8 @@ const UpcomingExam = () => {
         setLoading(true)
         try {
             let response = await fetchApi({ url: API_ENDPOINTS.EXAM, isAuthRequired: true, method: "GET" })
+            // let abc = await fetchApi({ url: API_ENDPOINTS.EXAM_ALL, isAuthRequired: true, method: "GET" })
+            // console.log(abc)
             setExamData(response.data);
         } catch (error) {
             toast.error("Error to fetch Data!")
