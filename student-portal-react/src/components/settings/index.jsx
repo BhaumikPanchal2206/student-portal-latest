@@ -8,6 +8,9 @@ import ConfirmationModal from '../shared/pop-up/confirmation-modal'
 const SettingPage = () => {
     const [show, setShow] = useState(false)
 
+    const handleSubmit = async (values) =>{
+        console.log(values)
+    }
 
     return (
         <>
@@ -24,13 +27,14 @@ const SettingPage = () => {
                             newpass: "",
                             confpass: "",
                         }}
+                        onSubmit={handleSubmit}
                     >
                         {formik => (
-                            <form className="p-6 flex flex-col justify-center col-span-2">
+                            <form onSubmit={formik.handleSubmit} className="p-6 flex flex-col justify-center col-span-2">
                                 <InputComponent formik={formik} type="password" label="Current password" name="currpass" placeholder="Current Password" />
                                 <InputComponent formik={formik} type="password" label="New password" name="newpass" placeholder="New Password" />
                                 <InputComponent formik={formik} type="password" label="Confirm password" name="confpass" placeholder="Confirm Password" />
-                                <button type="button" className="md:w-32 bg-blue-600 dark:bg-gray-100 text-white dark:text-gray-800 font-bold py-3 px-6 rounded-lg mt-2 hover:bg-blue-500 dark:hover:bg-gray-200 transition ease-in-out duration-300">
+                                <button type="submit" className="md:w-32 bg-blue-600 dark:bg-gray-100 text-white dark:text-gray-800 font-bold py-3 px-6 rounded-lg mt-2 hover:bg-blue-500 dark:hover:bg-gray-200 transition ease-in-out duration-300">
                                     Save
                                 </button>
                             </form>
