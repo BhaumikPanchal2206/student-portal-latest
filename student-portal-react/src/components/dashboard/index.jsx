@@ -61,7 +61,7 @@ const Dashboard = () => {
                                 <p className="text-gray-700 dark:text-gray-100 mb-4">
                                     You can add exam for any standard
                                 </p>
-                                <Link to="/announcements" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
+                                <Link to="/exam/upcoming-exam" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
                                     Add New Exam
                                 </Link>
                             </div>

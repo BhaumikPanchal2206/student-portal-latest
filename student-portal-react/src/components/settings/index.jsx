@@ -3,13 +3,19 @@ import React, { useState } from 'react'
 import InputComponent from '../shared/form/input-component'
 import { Formik } from 'formik'
 import ConfirmationModal from '../shared/pop-up/confirmation-modal'
+import fetchApi from '../../utils/helper'
+import { API_ENDPOINTS } from '../../constants/api'
 
 
 const SettingPage = () => {
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
 
-    const handleSubmit = async (values) =>{
-        console.log(values)
+    const handleSubmit = async (values) => {
+        let post_data = {
+            curr_password: values.curr_password,
+            new_password: values.new_password,
+        };
+        // let resonse = await fetchApi({ url: API_ENDPOINTS.RESET_PASS, data: post_data })
     }
 
     return (
@@ -23,9 +29,9 @@ const SettingPage = () => {
                     </div>
                     <Formik
                         initialValues={{
-                            currpass: "",
-                            newpass: "",
-                            confpass: "",
+                            curr_password: "",
+                            new_password: "",
+                            conf_password: "",
                         }}
                         onSubmit={handleSubmit}
                     >
