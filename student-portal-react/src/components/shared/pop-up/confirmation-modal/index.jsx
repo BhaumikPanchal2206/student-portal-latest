@@ -4,23 +4,26 @@ import CenterPopUp from '../popup-animation/center-fade'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
-const ConfirmationModal = ({ show, setShow, type }) => {
+const ConfirmationModal = ({ show, setShow, type, data = null, handleSubmit }) => {
     const navigate = useNavigate();
     const values = {
         "logout": {
             desc: "Are you sure you want to log out?",
+        },
+        "deleteDoubt":{
+            desc: "Are you sure you want to delete the doubt?",
         }
     }
 
     const handleOperation = async () => {
-        //     if (type === "logOut") {
-        localStorage.removeItem("userData");
-        localStorage.removeItem("auth");
-        navigate("/log-in");
-        toast.success("Log Out Successfully");
-        //     } else {
-        //         await handleSubmit(data);
-        //     }
+        if (type === "logOut") {
+            localStorage.removeItem("userData");
+            localStorage.removeItem("auth");
+            navigate("/log-in");
+            toast.success("Log Out Successfully");
+        } else {
+            await handleSubmit(data);
+        }
         setShow(false);
     }
 

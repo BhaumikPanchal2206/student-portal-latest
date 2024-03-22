@@ -6,10 +6,14 @@ import AddDoubtForm from '../../shared/pop-up/doubt-add-form'
 import fetchApi from '../../../utils/helper'
 import { API_ENDPOINTS } from '../../../constants/api'
 import { toast } from 'react-toastify'
+import ConfirmationModal from '../../shared/pop-up/confirmation-modal'
 
 const DoubtPage = () => {
     const [doubts, setDoubts] = useState([])
     const [show, setShow] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
+    const [deleteId, setDeleteId] = useState("")
+    const [isEdit, setIsEdit] = useState("")
     const userData = JSON.parse(localStorage.getItem('userData'));
 
     useEffect(() => {
@@ -23,6 +27,16 @@ const DoubtPage = () => {
             setDoubts(response.data)
         } catch (error) {
             toast.error("Error to fetch Doubt list")
+        }
+    }
+    
+    const handleDeleteDoubt = async () => {
+        try {
+            let res = await fetchApi({ url: API_ENDPOINTS.DOUBTS_STUDENT, isAuthRequired: true, method: "DELETE", data: { _id: deleteId } })
+            let response = await fetchApi({ url: API_ENDPOINTS.DOUBTS_STUDENT, isAuthRequired: true, method: "GET" })
+            setDoubts(response.data)
+        } catch (error) {
+            toast.error("Error to delete Doubt list")
         }
     }
 
@@ -39,7 +53,7 @@ const DoubtPage = () => {
                             Add Doubt
                         </button>
                     </div>
-                    {show && <AddDoubtForm setShow={setShow} setDoubts={setDoubts} />}
+                    {show && <AddDoubtForm isEdit={isEdit} setShow={setShow} setDoubts={setDoubts} />}
 
                     <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
                         {doubts.map((ele, index) => (
@@ -53,8 +67,14 @@ const DoubtPage = () => {
                                     </div>
                                     <div className="p-6 flex justify-between items-center bg-white dark:bg-gray-900 border-gray-200 text-right">
                                         <div className='flex items-center gap-4'>
-                                            <SVG src="/assets/icons/edit.svg" className='cursor-pointer' onClick={() => setShow(true)} />
-                                            <i className="fa-solid fa-trash text-red-500 cursor-pointer" onClick={() => setShow(true)}></i>
+                                            <SVG src="/assets/icons/edit.svg" className='cursor-pointer' onClick={() => {
+                                                setIsEdit(ele._id)
+                                                setShow(true)
+                                            }} />
+                                            <i className="fa-solid fa-trash text-red-500 cursor-pointer" onClick={() => {
+                                                setDeleteId(ele._id)
+                                                setShowDelete(true)
+                                            }}></i>
                                         </div>
                                         {/* <Link className="bg-blue-500 shadow-md text-sm text-white font-bold py-3 md:px-8 px-4 hover:bg-blue-400 dark:text-gray-800 dark:bg-gray-100 dark:hover:bg-gray-200 rounded uppercase"
                                             href={`/doubts`}>Show full</Link> */}
@@ -63,6 +83,7 @@ const DoubtPage = () => {
                             </div>
                         ))}
                     </div>
+                    <ConfirmationModal show={showDelete} setShow={setShowDelete} type={"deleteDoubt"} handleSubmit={handleDeleteDoubt} />
                 </>
             ) : (
                 <>

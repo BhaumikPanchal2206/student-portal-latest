@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import CenterPopUp from '../popup-animation/center-fade'
 import InputComponent from '../../form/input-component';
@@ -7,23 +7,36 @@ import fetchApi from '../../../../utils/helper';
 import { API_ENDPOINTS } from '../../../../constants/api';
 import { toast } from 'react-toastify';
 
-const AddDoubtForm = ({ setShow, setDoubts }) => {
+const AddDoubtForm = ({ setShow, setDoubts, isEdit }) => {
+    const [currentData, setCurrentData] = useState({ dt_topic: "", dt_desc: "" })
     const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        isEdit !== "" && checkIsedit();
+    }, [isEdit])
+
+    const checkIsedit = async () => {
+        console.log("first")
+        if (isEdit !== "") {
+            let res = await fetchApi({ url: API_ENDPOINTS.DOUBTS_STUDENT, method: "GET", isAuthRequired: true })
+            let a = res.data.find(ele => ele._id === isEdit)
+            setCurrentData({ _id: a._id, dt_topic: a.dt_topic, dt_desc: a.dt_desc })
+        }
+    }
 
     const handleAddDoubt = async (values) => {
+        let method = isEdit !== "" ? "PUT" : "POST"
         setLoading(false);
-        // let post_data = { ...values, dt_isAnswerd: false, dt_answer: false }
         try {
-            let response = await fetchApi({ url: API_ENDPOINTS.DOUBTS_STUDENT, method: "POST", isAuthRequired: true, data: values })
-            // console.log(response);
-            setLoading(true);
+            let response = await fetchApi({ url: API_ENDPOINTS.DOUBTS_STUDENT, method: method, isAuthRequired: true, data: values })
             let res = await fetchApi({ url: API_ENDPOINTS.DOUBTS_STUDENT, method: "GET", isAuthRequired: true })
-            setDoubts(res.data)
+            setDoubts(res.data);
             setShow(false);
             toast.success("Doubts Added Ssuccessfully!")
         } catch (error) {
             toast.error("Error to fetch Student doubt")
+        } finally {
+            setLoading(true);
         }
     }
 
@@ -32,7 +45,8 @@ const AddDoubtForm = ({ setShow, setDoubts }) => {
             <CenterPopUp setShow={setShow} width="w-full">
                 <div className="px-10 w-[80%] max-w-full py-8 shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] rounded-lg pointer-events-auto relative flex w-full flex-col border-none bg-white dark:bg-gray-800 bg-clip-padding text-current shadow-lg outline-none">
                     <Formik
-                        initialValues={{ dt_topic: "", dt_desc: "" }}
+                        initialValues={currentData}
+                        enableReinitialize
                         onSubmit={handleAddDoubt}
                     >
                         {formik => (
