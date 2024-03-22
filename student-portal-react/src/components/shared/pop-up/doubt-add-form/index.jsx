@@ -16,7 +16,6 @@ const AddDoubtForm = ({ setShow, setDoubts, isEdit }) => {
     }, [isEdit])
 
     const checkIsedit = async () => {
-        console.log("first")
         if (isEdit !== "") {
             let res = await fetchApi({ url: API_ENDPOINTS.DOUBTS_STUDENT, method: "GET", isAuthRequired: true })
             let a = res.data.find(ele => ele._id === isEdit)
