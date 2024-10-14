@@ -15,7 +15,8 @@ const TeacherAnswerDoubt = ({ show, setShow, doubt, isEdit, setDoubts }) => {
     }, [isEdit])
 
     const checkIsedit = async () => {
-        if (isEdit !== "") {
+        if (isEdit !== "" && isEdit !== undefined) {
+            console.log(isEdit)
             let res = await fetchApi({ url: API_ENDPOINTS.DOUBTS_ADMIN, method: "GET", isAuthRequired: true })
             let a = res.data.find(ele => ele._id === isEdit)
             setCurrentData({ dt_id: a._id, dt_isAnswerd: true, dt_answer: a.dt_answer })
@@ -49,8 +50,8 @@ const TeacherAnswerDoubt = ({ show, setShow, doubt, isEdit, setDoubts }) => {
             {show && <CenterPopUp setShow={setShow} width="w-full">
                 <div className="px-10 w-[80%] max-w-full py-8 shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] rounded-lg pointer-events-auto relative flex w-full flex-col border-none bg-white dark:bg-gray-800 bg-clip-padding text-current shadow-lg outline-none">
                     <div>
-                        <div class="mb-4">Doubt Topic :- <span class="font-bold">{doubt.dt_topic}</span></div>
-                        <div class="mb-4">Doubt Description :- <span class="font-bold">{doubt.dt_desc}</span></div>
+                        <div className="mb-4">Doubt Topic :- <span className="font-bold">{doubt.dt_topic}</span></div>
+                        <div className="mb-4">Doubt Description :- <span className="font-bold">{doubt.dt_desc}</span></div>
                     </div>
                     <Formik
                         initialValues={currentData}

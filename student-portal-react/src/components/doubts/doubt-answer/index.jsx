@@ -45,8 +45,8 @@ const DoubtAnswer = () => {
                     <div key={index} className="w-full mx-auto sm:px-6 lg:px-8 sm:py-6 lg:py-8">
                         <div className="overflow-hidden shadow-md">
                             <div className='p-6 pb-0 border-b border-gray-200'>
-                                <div class="mb-2">Doubt Topic :- <span class="font-bold">{ele.dt_topic}</span></div>
-                                <div class="mb-2">Doubt Description :- <span class="font-bold">{ele.dt_desc}</span></div>
+                                <div className="mb-2">Doubt Topic :- <span className="font-bold">{ele.dt_topic}</span></div>
+                                <div className="mb-2">Doubt Description :- <span className="font-bold">{ele.dt_desc}</span></div>
                             </div>
                             <div className="p-6 bg-white dark:bg-gray-900 border-b border-gray-200">
                                 <h1 className='font-bold text-lg pb-2'>Answer:-</h1>

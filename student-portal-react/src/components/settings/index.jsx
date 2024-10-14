@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import InputComponent from '../shared/form/input-component'
 import { Formik } from 'formik'
+import { toast } from 'react-toastify';
 import ConfirmationModal from '../shared/pop-up/confirmation-modal'
 import fetchApi from '../../utils/helper'
 import { API_ENDPOINTS } from '../../constants/api'
@@ -9,13 +10,31 @@ import { API_ENDPOINTS } from '../../constants/api'
 
 const SettingPage = () => {
     const [show, setShow] = useState(false);
+    const [data, setData] = useState({
+        cur_password: "",
+        new_password: "",
+        conf_password: "",
+    })
 
     const handleSubmit = async (values) => {
         let post_data = {
-            curr_password: values.curr_password,
+            cur_password: values.cur_password,
             new_password: values.new_password,
         };
-        // let resonse = await fetchApi({ url: API_ENDPOINTS.RESET_PASS, data: post_data })
+        try {
+            console.log("first")
+            let res = await fetchApi({ url: API_ENDPOINTS.RESET_PASS, method: "POST", data: post_data, isAuthRequired: true })
+            if (res.status === 200) {
+                toast.success("Password updated successfully")
+                setData({
+                    cur_password: "",
+                    new_password: "",
+                    conf_password: "",
+                })
+            }
+        } catch (error) {
+            console.log("ERROR")
+        }
     }
 
     return (
@@ -28,18 +47,14 @@ const SettingPage = () => {
                         <p><i>Update your password associated with your account.</i></p>
                     </div>
                     <Formik
-                        initialValues={{
-                            curr_password: "",
-                            new_password: "",
-                            conf_password: "",
-                        }}
+                        initialValues={data}
                         onSubmit={handleSubmit}
                     >
                         {formik => (
                             <form onSubmit={formik.handleSubmit} className="p-6 flex flex-col justify-center col-span-2">
-                                <InputComponent formik={formik} type="password" label="Current password" name="currpass" placeholder="Current Password" />
-                                <InputComponent formik={formik} type="password" label="New password" name="newpass" placeholder="New Password" />
-                                <InputComponent formik={formik} type="password" label="Confirm password" name="confpass" placeholder="Confirm Password" />
+                                <InputComponent formik={formik} type="password" label="Current password" name="cur_password" placeholder="Current Password" />
+                                <InputComponent formik={formik} type="password" label="New password" name="new_password" placeholder="New Password" />
+                                <InputComponent formik={formik} type="password" label="Confirm password" name="conf_password" placeholder="Confirm Password" />
                                 <button type="submit" className="md:w-32 bg-blue-600 dark:bg-gray-100 text-white dark:text-gray-800 font-bold py-3 px-6 rounded-lg mt-2 hover:bg-blue-500 dark:hover:bg-gray-200 transition ease-in-out duration-300">
                                     Save
                                 </button>

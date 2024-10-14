@@ -72,7 +72,7 @@ const Dashboard = () => {
                             </div>
                             <div className="p-4">
                                 <p className="text-gray-700 dark:text-gray-100 mb-4">
-                                    Add a new announcement for any future event or any important work
+                                Ram Navami is a Hindu festival that celebrates the birth of Lord Rama, one of the ten avatars of Lord Vishnu, who is revered as a...
                                 </p>
                                 <Link to="/announcements" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
                                     Add Announcements
@@ -130,8 +130,8 @@ const Dashboard = () => {
                                 <i className="fa-solid fa-bullhorn me-4"></i>Announcements
                             </div>
                             <div className="p-4">
-                                <h5 className="text-lg font-bold mb-2 text-black dark:text-white">26 January</h5>
-                                <p className="text-gray-700 dark:text-gray-100 mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem, veritatis.</p>
+                                <h5 className="text-lg font-bold mb-2 text-black dark:text-white">Ram Navami</h5>
+                                <p className="text-gray-700 dark:text-gray-100 mb-4">Ram Navami is a Hindu festival that celebrates the birth of Lord Rama...</p>
                                 <Link to="/announcements" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
                                     View all
                                 </Link>

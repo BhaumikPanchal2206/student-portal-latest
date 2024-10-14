@@ -26,7 +26,6 @@ const DoubtPage = () => {
 
     const fetchDoubts = async () => {
         if (userData.user_role === "student") {
-
             try {
                 let response = await fetchApi({ url: API_ENDPOINTS.DOUBTS_STUDENT, isAuthRequired: true, method: "GET" })
                 setDoubts(response.data)

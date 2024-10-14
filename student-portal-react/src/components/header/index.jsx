@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 
+import { Link, useNavigate } from 'react-router-dom'
 import SVG from "react-inlinesvg"
 import ConfirmationModal from '../shared/pop-up/confirmation-modal';
 // import LogOut from '../shared/pop-up/log-out';
@@ -7,7 +8,15 @@ import ConfirmationModal from '../shared/pop-up/confirmation-modal';
 const Header = ({ isDark, setIsDark }) => {
     const [show, setShow] = useState(false);
     const userData = JSON.parse(localStorage.getItem('userData'))
+    const navigate = useNavigate();
 
+    const handleSubmit = () =>{
+        localStorage.removeItem("userData");
+        localStorage.removeItem("expiry");
+        localStorage.removeItem("auth");
+        
+    }
+    
     return (
         <>
             <div className="fixed w-full flex items-center justify-between h-14 text-white z-10 bg-blue-800">
@@ -36,7 +45,7 @@ const Header = ({ isDark, setIsDark }) => {
                         />
                     </div>
                     <ul className="flex items-center">
-                        <li>
+                        {/* <li>
                             <button
                                 onClick={() => {
                                     setIsDark((pre) => !pre)
@@ -47,7 +56,7 @@ const Header = ({ isDark, setIsDark }) => {
                             >
                                 {isDark ? <SVG src='/assets/icons/star.svg' /> : <SVG src='/assets/icons/night.svg' />}
                             </button>
-                        </li>
+                        </li> */}
                         <li>
                             <div className="block w-px h-6 mx-3 bg-gray-400 dark:bg-gray-700" />
                         </li>
@@ -64,7 +73,7 @@ const Header = ({ isDark, setIsDark }) => {
                     </ul>
                 </div>
             </div>
-            <ConfirmationModal show={show} setShow={setShow} type="logout" />
+            <ConfirmationModal show={show} setShow={setShow} type="logout" handleSubmit={handleSubmit}  />
         </>
     )
 }

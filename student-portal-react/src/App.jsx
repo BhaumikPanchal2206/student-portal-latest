@@ -22,11 +22,12 @@ import ExamFees from './components/exam/exam-fees';
 import ExamResult from './components/exam/exam-result';
 import UpcomingExam from './components/exam/upcoming-exam';
 import ExamDetails from './components/exam/exam-id';
-import { ToastContainer } from 'react-toastify';
 import UserContext from './contexts/UserContext';
 import ProtectedRoute from './components/protected';
 import DoubtLayout from './components/doubts/doubt-layout';
 import DoubtAnswer from './components/doubts/doubt-answer';
+
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -36,14 +37,14 @@ function App() {
         <Routes>
 
           {/* Auth Components */}
-          <Route path="/" element={<ProtectedRoute />}>
+          {/* <Route path="/" element={<ProtectedRoute />}> */}
             <Route index element={<LogIn />} />
             <Route path="/log-in" element={<LogIn />} />
             <Route path="/register" element={<SignUp />} />
-          </Route>
+          {/* </Route> */}
 
           {/* After Logged In */}
-          <Route path="/" element={<ProtectedRoute />}>
+          {/* <Route path="/" element={<ProtectedRoute />}> */}
             <Route path="/" element={<HomeLayout />} >
               <Route index element={<Dashboard />} />
               <Route path="announcements" element={<Announcements />} />
@@ -63,9 +64,9 @@ function App() {
               </Route>
               <Route path="profile" element={<Profile />} />
               <Route path="settings" element={<SettingPage />} />
-              <Route path="notes" element={<Notes />} />
+              {/* <Route path="notes" element={<Notes />} /> */}
             </Route>
-          </Route>
+          {/* </Route> */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>

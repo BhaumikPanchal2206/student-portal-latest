@@ -16,7 +16,7 @@ const ConfirmationModal = ({ show, setShow, type, data = null, handleSubmit }) =
     }
 
     const handleOperation = async () => {
-        if (type === "logOut") {
+        if (type === "logout") {
             localStorage.removeItem("userData");
             localStorage.removeItem("auth");
             navigate("/log-in");

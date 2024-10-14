@@ -6,7 +6,7 @@ const ExamHeader = () => {
     const location = useLocation();
 
     const header_links = [
-        { name: "Result", href: "/exam/result" },
+        // { name: "Result", href: "/exam/result" },
         { name: "Upcoming Exam", href: "/exam/upcoming-exam" },
         // { name: "Exam Fees", href: "/exam/exam-fees" },
     ]
