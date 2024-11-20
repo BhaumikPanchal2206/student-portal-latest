@@ -15,15 +15,17 @@ const SettingPage = () => {
         new_password: "",
         conf_password: "",
     })
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (values) => {
         let post_data = {
             cur_password: values.cur_password,
             new_password: values.new_password,
         };
+        setLoading(true);
         try {
-            console.log("first")
-            let res = await fetchApi({ url: API_ENDPOINTS.RESET_PASS, method: "POST", data: post_data, isAuthRequired: true })
+            // console.log("first");
+            let res = await fetchApi({ url: API_ENDPOINTS.CHANGE_PASS, method: "POST", data: post_data, isAuthRequired: true })
             if (res.status === 200) {
                 toast.success("Password updated successfully")
                 setData({
@@ -34,6 +36,8 @@ const SettingPage = () => {
             }
         } catch (error) {
             console.log("ERROR")
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -56,7 +60,9 @@ const SettingPage = () => {
                                 <InputComponent formik={formik} type="password" label="New password" name="new_password" placeholder="New Password" />
                                 <InputComponent formik={formik} type="password" label="Confirm password" name="conf_password" placeholder="Confirm Password" />
                                 <button type="submit" className="md:w-32 bg-blue-600 dark:bg-gray-100 text-white dark:text-gray-800 font-bold py-3 px-6 rounded-lg mt-2 hover:bg-blue-500 dark:hover:bg-gray-200 transition ease-in-out duration-300">
-                                    Save
+                                    {loading ? (
+                                        <div className="animate-spin me-2"><i className="fa-solid fa-spinner"></i></div>
+                                    ) : "Save"}
                                 </button>
                             </form>
                         )}

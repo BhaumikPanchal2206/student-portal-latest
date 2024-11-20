@@ -4,7 +4,6 @@ import ExamHeader from "../header";
 const ExamLayout = () => {
     return (
         <>
-            <ExamHeader />
             <div>
                 <Outlet />
             </div>

@@ -82,7 +82,7 @@ const Dashboard = () => {
                     </div>
                 ) : (
                     <div className='px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                        <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
+                        {/* <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
                             <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
                                 Exam Result
                             </div>
@@ -112,16 +112,16 @@ const Dashboard = () => {
                                     </Link>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="bg-white dark:bg-gray-800 shadow-lg border border-white dark:border-black rounded-lg overflow-hidden">
                             <div className="bg-blue-800 text-xl dark:bg-gray-900 text-white py-2 px-4">
                                 Featured
                             </div>
                             <div className="p-4">
-                                <h5 className="text-lg font-bold mb-2 text-black dark:text-white">Last Exam Result</h5>
+                                <h5 className="text-lg font-bold mb-2 text-black dark:text-white">Last Exam</h5>
                                 <p className="text-gray-700 dark:text-gray-100 mb-4">With supporting text below as a natural lead-in to additional content.</p>
-                                <Link to="/exam/result" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
-                                    Show Results
+                                <Link to="/exam/upcoming-exam" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
+                                    Show Exams
                                 </Link>
                             </div>
                         </div>
