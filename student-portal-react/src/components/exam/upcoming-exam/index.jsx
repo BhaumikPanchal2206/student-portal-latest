@@ -12,6 +12,7 @@ import { Formik } from 'formik';
 const UpcomingExam = () => {
     const [examData, setExamData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const userData = JSON.parse(localStorage.getItem('userData'));
 
     useEffect(() => {
         fetchExams();
@@ -20,7 +21,7 @@ const UpcomingExam = () => {
     const fetchExams = async () => {
         setLoading(true);
         try {
-            let response = await fetchApi({ url: API_ENDPOINTS.EXAM, isAuthRequired: true, method: "GET" });
+            let response = await fetchApi({ url: userData.user_role === "student" ? API_ENDPOINTS.EXAM : API_ENDPOINTS.EXAM_ALL, isAuthRequired: true, method: "GET" });
             setExamData(response.data);
         } catch (error) {
             toast.error("Error fetching data!");
@@ -31,7 +32,6 @@ const UpcomingExam = () => {
 
 
     const location = useLocation();
-    const userData = JSON.parse(localStorage.getItem('userData'));
     const [isOpen, setIsOpen] = useState(false);
     const [loadingAddExam, setLoadingAddExam] = useState(false)
     const [newExamAdd, setNewExamAdd] = useState({
