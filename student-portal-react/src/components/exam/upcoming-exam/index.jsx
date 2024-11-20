@@ -56,6 +56,7 @@ const UpcomingExam = () => {
             let response = await fetchApi({ url: API_ENDPOINTS.EXAM, method: "POST", data: values, isAuthRequired: true });
             if (response.status == 200) {
                 toast.success(response.messsge);
+                setIsOpen(false);
                 fetchExams();
             }
         } catch (error) {
