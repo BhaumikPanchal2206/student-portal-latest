@@ -13,8 +13,7 @@ const Header = ({ isDark, setIsDark }) => {
     const handleSubmit = () =>{
         localStorage.removeItem("userData");
         localStorage.removeItem("expiry");
-        localStorage.removeItem("auth");
-        
+        localStorage.removeItem("auth");   
     }
     
     return (
@@ -24,7 +23,7 @@ const Header = ({ isDark, setIsDark }) => {
                     <img
                         alt=''
                         className="hidden md:block w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden"
-                        src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg"
+                        src="/assets/images/dummy-image.jpg"
                     />
                     <span className="hidden md:block">{userData.user_fname} {userData.user_lname}</span>
                     <div className='block md:hidden relative bg-gray-100 dark:bg-gray-900 w-9 h-9 sm:w-11 sm:h-11 rounded-full text-gray-800 dark:text-gray-100 text-lg sm:text-xl'>
@@ -45,7 +44,7 @@ const Header = ({ isDark, setIsDark }) => {
                         />
                     </div>
                     <ul className="flex items-center">
-                        {/* <li>
+                        <li>
                             <button
                                 onClick={() => {
                                     setIsDark((pre) => !pre)
@@ -56,7 +55,7 @@ const Header = ({ isDark, setIsDark }) => {
                             >
                                 {isDark ? <SVG src='/assets/icons/star.svg' /> : <SVG src='/assets/icons/night.svg' />}
                             </button>
-                        </li> */}
+                        </li>
                         <li>
                             <div className="block w-px h-6 mx-3 bg-gray-400 dark:bg-gray-700" />
                         </li>

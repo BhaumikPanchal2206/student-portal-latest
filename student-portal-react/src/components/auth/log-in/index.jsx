@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react'
-
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import AuthInput from '../../shared/form/auth-input';
 import { logInValidation } from '../../../constants/validation';
@@ -22,7 +21,7 @@ const LogIn = () => {
             if (response.status === 200) {
                 localStorage.setItem("auth", response.token);
                 localStorage.setItem("userData", JSON.stringify(response.data));
-                setUserData(response.data)
+                setUserData(response.data);
                 navigate(response.data.user_role === "admin" ? "/dashboard" : "/dashboard");
                 toast.success("Log In Successfully");
             } else {
@@ -36,50 +35,49 @@ const LogIn = () => {
     };
 
     return (
-        <>
-            <div className="mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white">
-                <section className="flex w-[30rem] flex-col space-y-10">
-                    <div className="text-center text-4xl font-medium">Log In</div>
-                    <Formik
-                        onSubmit={(values) => loading && handleSubmit(values)}
-                        initialValues={VALUES.logIn}
-                        validationSchema={logInValidation}
-                    >
-                        {formik => (
-                            <form onSubmit={formik.handleSubmit} className='flex w-full px-3 flex-col space-y-10'>
-                                <AuthInput formik={formik} name="user_email" placeholder="Email or Username" type="text" />
-                                <AuthInput formik={formik} name="user_pass" placeholder="Password" type="password" />
-                                <button type='submit' className="transform rounded-sm bg-indigo-600 py-2 font-bold duration-300 hover:bg-indigo-400">
-                                    {
-                                        loading ? "LOG IN" :
-                                            <div className="animate-spin me-2">
-                                                <i className="fa-solid fa-spinner">
-                                                </i>
-                                            </div>
-                                    }
-                                </button>
-                            </form>
-                        )}
-                    </Formik>
+        <div className="mx-auto flex min-h-screen w-full items-center justify-center bg-gray-100 text-gray-800">
+            <section className="flex w-[30rem] flex-col space-y-10">
+                <div className="text-center text-4xl font-medium">Log In</div>
+                <Formik
+                    onSubmit={(values) => loading && handleSubmit(values)}
+                    initialValues={VALUES.logIn}
+                    validationSchema={logInValidation}
+                >
+                    {formik => (
+                        <form onSubmit={formik.handleSubmit} className="flex w-full px-3 flex-col space-y-10">
+                            <AuthInput formik={formik} name="user_email" placeholder="Email or Username" type="text" />
+                            <AuthInput formik={formik} name="user_pass" placeholder="Password" type="password" />
+                            <button
+                                type="submit"
+                                className="transform rounded-sm bg-indigo-600 py-2 font-bold text-white duration-300 hover:bg-indigo-500"
+                            >
+                                {loading ? "LOG IN" : (
+                                    <div className="animate-spin me-2">
+                                        <i className="fa-solid fa-spinner"></i>
+                                    </div>
+                                )}
+                            </button>
+                        </form>
+                    )}
+                </Formik>
+                <Link
+                    to="/log-in"
+                    className="transform text-center font-semibold text-gray-500 duration-300 hover:text-gray-700"
+                >
+                    FORGOT PASSWORD?
+                </Link>
+                <p className="text-center text-lg">
+                    No account?
                     <Link
-                        to="/log-in"
-                        className="transform text-center font-semibold text-gray-500 duration-300 hover:text-gray-300"
+                        to="/register"
+                        className="ms-1 font-medium text-indigo-500 underline-offset-4 hover:underline"
                     >
-                        FORGOT PASSWORD?
+                        Register
                     </Link>
-                    <p className="text-center text-lg">
-                        No account?
-                        <Link
-                            to="/register"
-                            className="ms-1 font-medium text-indigo-500 underline-offset-4 hover:underline"
-                        >
-                            Register
-                        </Link>
-                    </p>
-                </section>
-            </div>
-        </>
-    )
-}
+                </p>
+            </section>
+        </div>
+    );
+};
 
-export default LogIn
+export default LogIn;

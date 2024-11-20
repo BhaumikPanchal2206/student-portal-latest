@@ -25,7 +25,7 @@ const Dashboard = () => {
                         <div className="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center flex-shrink-0">
                             <img
                                 alt=''
-                                src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
+                                src="/assets/images/dummy-image.jpg" />
                         </div>
                         <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                             <h1 className="text-black dark:text-gray-100 text-lg md:text-4xl title-font font-bold mb-2">
@@ -72,7 +72,7 @@ const Dashboard = () => {
                             </div>
                             <div className="p-4">
                                 <p className="text-gray-700 dark:text-gray-100 mb-4">
-                                Ram Navami is a Hindu festival that celebrates the birth of Lord Rama, one of the ten avatars of Lord Vishnu, who is revered as a...
+                                    Ram Navami is a Hindu festival that celebrates the birth of Lord Rama, one of the ten avatars of Lord Vishnu, who is revered as a...
                                 </p>
                                 <Link to="/announcements" className="bg-blue-500 dark:bg-gray-100 text-white dark:text-gray-800 py-2 px-4 rounded">
                                     Add Announcements

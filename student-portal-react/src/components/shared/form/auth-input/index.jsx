@@ -18,7 +18,7 @@ const AuthInput = ({ formik, name, placeholder, type }) => {
                     className="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
                 />
                 {type === "password" && (
-                    <i className={`fa-solid ${show ? 'fa-eye' : 'fa-eye-slash'} absolute right-4 top-0 text-2xl cursor-pointer`} onClick={() => setShow(pre => !pre)}></i>
+                    <i className={`fa-solid ${show ? 'fa-eye' : 'fa-eye-slash'} absolute right-4 top-0 text-2xl cursor-pointer z-50`} onClick={() => setShow(pre => !pre)}></i>
                 )}
             </div>
             {touched[name] && errors[name] && (
