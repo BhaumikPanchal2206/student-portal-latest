@@ -31,7 +31,8 @@ const Header = ({ isDark, setIsDark }) => {
                     </div>
                 </div>
                 <div className="flex justify-between items-center h-14 bg-blue-800 dark:bg-gray-800 header-right">
-                    <div className="bg-white rounded flex items-center w-full max-w-xl mr-4 p-2 shadow-sm border border-gray-200">
+                    <div></div>
+                    {/* <div className="bg-white rounded flex items-center w-full max-w-xl mr-4 p-2 shadow-sm border border-gray-200">
                         <button className="outline-none focus:outline-none">
                             <SVG src='/assets/icons/search.svg' />
                         </button>
@@ -42,7 +43,7 @@ const Header = ({ isDark, setIsDark }) => {
                             placeholder="Search"
                             className="w-full pl-3 text-sm text-black outline-none focus:outline-none bg-transparent"
                         />
-                    </div>
+                    </div> */}
                     <ul className="flex items-center">
                         <li>
                             <button
